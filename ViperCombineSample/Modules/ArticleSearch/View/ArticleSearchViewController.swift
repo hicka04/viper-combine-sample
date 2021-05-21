@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ArticleSearchViewController.swift
 //  ViperCombineSample
 //
 //  Created by hicka04 on 2021/05/21.
@@ -7,13 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ArticleSearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        view.backgroundColor = .blue
     }
-
-
 }
-

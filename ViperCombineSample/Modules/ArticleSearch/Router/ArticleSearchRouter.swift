@@ -23,7 +23,8 @@ final class ArticleSearchRouter {
     static func assembleModules() -> UIViewController {
         let view = ArticleSearchViewController()
         let router = ArticleSearchRouter(viewController: view)
-        let presenter = ArticleSearchPresenter(router: router)
+        let articleSearchInteractor = ArticleSearchInteractor()
+        let presenter = ArticleSearchPresenter(router: router, articleSearchInteractor: articleSearchInteractor)
         
         view.presenter = presenter
         

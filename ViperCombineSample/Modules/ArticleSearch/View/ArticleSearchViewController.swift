@@ -8,6 +8,7 @@
 import UIKit
 
 class ArticleSearchViewController: UIViewController {
+    var presenter: ArticleSearchPresentation!
 
     override func viewDidLoad() {
         super.viewDidLoad()

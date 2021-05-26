@@ -27,7 +27,7 @@ class ArticleSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.articlesSubject
+        presenter.articlesPublisher
             .sink { articles in
                 var snapshot = NSDiffableDataSourceSnapshot<Int, ArticleModel>()
                 snapshot.appendSections([0])

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ArticleSearchPresentation: AnyObject {
-    var articlesSubject: CurrentValueSubject<[ArticleModel], Never> { get }
+    var articlesPublisher: Published<[ArticleModel]>.Publisher { get }
     
     func viewDidLoad()
 }
@@ -18,7 +18,8 @@ final class ArticleSearchPresenter {
     private var cancellables: Set<AnyCancellable> = []
     private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
     
-    var articlesSubject = CurrentValueSubject<[ArticleModel], Never>([])
+    @Published var articles: [ArticleModel] = []
+    var articlesPublisher: Published<[ArticleModel]>.Publisher { $articles }
     
     init<
         Router: ArticleSearchWireframe,
@@ -34,8 +35,7 @@ final class ArticleSearchPresenter {
                     .catch { _ in
                         Empty()
                     }
-            }
-            .subscribe(articlesSubject)
+            }.assign(to: \.articles, on: self)
             .store(in: &cancellables)
     }
 }

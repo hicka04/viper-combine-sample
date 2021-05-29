@@ -25,6 +25,9 @@
 		B82B82592661F87D000EA62C /* ArticleSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B82582661F87D000EA62C /* ArticleSearchRequest.swift */; };
 		B82B825D2661F9BB000EA62C /* APIKit+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B825C2661F9BB000EA62C /* APIKit+extension.swift */; };
 		B82B82602661FBD7000EA62C /* ArticleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B825F2661FBD7000EA62C /* ArticleEntity.swift */; };
+		B82B826326628E58000EA62C /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B82B826226628E58000EA62C /* OHHTTPStubsSwift */; };
+		B82B826626628FBA000EA62C /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = B82B826526628FBA000EA62C /* Quick */; };
+		B82B826926628FD6000EA62C /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = B82B826826628FD6000EA62C /* Nimble */; };
 		B87414D02657DFBC0061A031 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87414CF2657DFBC0061A031 /* AppDelegate.swift */; };
 		B87414D22657DFBC0061A031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87414D12657DFBC0061A031 /* SceneDelegate.swift */; };
 		B87414D92657DFBD0061A031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87414D82657DFBD0061A031 /* Assets.xcassets */; };
@@ -84,6 +87,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82B826926628FD6000EA62C /* Nimble in Frameworks */,
+				B82B826626628FBA000EA62C /* Quick in Frameworks */,
+				B82B826326628E58000EA62C /* OHHTTPStubsSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +381,11 @@
 				B87414E42657DFBD0061A031 /* PBXTargetDependency */,
 			);
 			name = ViperCombineSampleTests;
+			packageProductDependencies = (
+				B82B826226628E58000EA62C /* OHHTTPStubsSwift */,
+				B82B826526628FBA000EA62C /* Quick */,
+				B82B826826628FD6000EA62C /* Nimble */,
+			);
 			productName = ViperCombineSampleTests;
 			productReference = B87414E22657DFBD0061A031 /* ViperCombineSampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -408,6 +419,9 @@
 			mainGroup = B87414C32657DFBC0061A031;
 			packageReferences = (
 				B82B82512661F72C000EA62C /* XCRemoteSwiftPackageReference "APIKit" */,
+				B82B826126628E58000EA62C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
+				B82B826426628FBA000EA62C /* XCRemoteSwiftPackageReference "Quick" */,
+				B82B826726628FD6000EA62C /* XCRemoteSwiftPackageReference "Nimble" */,
 			);
 			productRefGroup = B87414CD2657DFBC0061A031 /* Products */;
 			projectDirPath = "";
@@ -732,6 +746,30 @@
 				minimumVersion = 5.2.0;
 			};
 		};
+		B82B826126628E58000EA62C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
+		B82B826426628FBA000EA62C /* XCRemoteSwiftPackageReference "Quick" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Quick.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		B82B826726628FD6000EA62C /* XCRemoteSwiftPackageReference "Nimble" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -739,6 +777,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B82B82512661F72C000EA62C /* XCRemoteSwiftPackageReference "APIKit" */;
 			productName = APIKit;
+		};
+		B82B826226628E58000EA62C /* OHHTTPStubsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B82B826126628E58000EA62C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubsSwift;
+		};
+		B82B826526628FBA000EA62C /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B82B826426628FBA000EA62C /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
+		B82B826826628FD6000EA62C /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B82B826726628FD6000EA62C /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

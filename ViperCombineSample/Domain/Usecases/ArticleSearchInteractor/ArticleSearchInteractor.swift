@@ -22,14 +22,18 @@ where Input == String,
       Failure == ArticleSearchError {}
 
 final class ArticleSearchInteractor {
+    private let qiitaRepository: QiitaRepository
     
+    init(qiitaRepository: QiitaRepository) {
+        self.qiitaRepository = qiitaRepository
+    }
 }
 
 extension ArticleSearchInteractor: ArticleSearchUsecase {
     func execute(_ input: String) -> AnyPublisher<[ArticleModel], ArticleSearchError> {
-        Future { promise in
-            promise(.success([ArticleModel(id: .init(rawValue: "article_id"), title: "article_title", body: "article_body")]))
-        }
-        .eraseToAnyPublisher()
+        qiitaRepository
+            .searchArticles(keyword: input)
+            .mapError { .init(error: $0) }
+            .eraseToAnyPublisher()
     }
 }

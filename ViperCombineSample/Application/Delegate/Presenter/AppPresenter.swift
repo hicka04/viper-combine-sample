@@ -15,14 +15,20 @@ protocol AppPresentation: AnyObject {
 final class AppPresenter {
     private var cancellables: Set<AnyCancellable> = []
     private let sceneWillConnectToSessionSubject = PassthroughSubject<Void, Never>()
+    private let destinationSubject = PassthroughSubject<AppDestination, Never>()
     
     init<Router: AppWireframe>(
         router: Router
     ) {
-        sceneWillConnectToSessionSubject
-            .sink {
-                router.navigatie(to: .artcileSearch)
+        destinationSubject
+            .sink { destination in
+                router.navigatie(to: destination)
             }.store(in: &cancellables)
+        
+        sceneWillConnectToSessionSubject
+            .map { .artcileSearch }
+            .subscribe(destinationSubject)
+            .store(in: &cancellables)
     }
 }
 

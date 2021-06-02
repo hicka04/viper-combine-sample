@@ -32,7 +32,7 @@
 		B87414D22657DFBC0061A031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87414D12657DFBC0061A031 /* SceneDelegate.swift */; };
 		B87414D92657DFBD0061A031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87414D82657DFBD0061A031 /* Assets.xcassets */; };
 		B87414DC2657DFBD0061A031 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87414DA2657DFBD0061A031 /* LaunchScreen.storyboard */; };
-		B87414E72657DFBD0061A031 /* ViperCombineSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87414E62657DFBD0061A031 /* ViperCombineSampleTests.swift */; };
+		B88DB0F92667A32B00864021 /* AppPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88DB0F82667A32B00864021 /* AppPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,8 +70,8 @@
 		B87414DB2657DFBD0061A031 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B87414DD2657DFBD0061A031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B87414E22657DFBD0061A031 /* ViperCombineSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViperCombineSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B87414E62657DFBD0061A031 /* ViperCombineSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViperCombineSampleTests.swift; sourceTree = "<group>"; };
 		B87414E82657DFBD0061A031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B88DB0F82667A32B00864021 /* AppPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,10 +338,26 @@
 		B87414E52657DFBD0061A031 /* ViperCombineSampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				B87414E62657DFBD0061A031 /* ViperCombineSampleTests.swift */,
 				B87414E82657DFBD0061A031 /* Info.plist */,
+				B88DB0F62667A30B00864021 /* Application */,
 			);
 			path = ViperCombineSampleTests;
+			sourceTree = "<group>";
+		};
+		B88DB0F62667A30B00864021 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B88DB0F72667A31700864021 /* Delegate */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		B88DB0F72667A31700864021 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				B88DB0F82667A32B00864021 /* AppPresenterTests.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -483,7 +499,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B87414E72657DFBD0061A031 /* ViperCombineSampleTests.swift in Sources */,
+				B88DB0F92667A32B00864021 /* AppPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

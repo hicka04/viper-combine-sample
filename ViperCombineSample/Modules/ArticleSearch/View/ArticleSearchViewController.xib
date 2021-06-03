@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticleSearchViewController" customModule="ViperCombineSample" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="GAn-lr-iga" id="gyF-VU-BPW"/>
+                <outlet property="tableView" destination="GAn-lr-iga" id="PZY-dT-qei"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

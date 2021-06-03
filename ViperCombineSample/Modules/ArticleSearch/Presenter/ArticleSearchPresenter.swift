@@ -8,15 +8,20 @@
 import Foundation
 import Combine
 
-protocol ArticleSearchPresentation: AnyObject {
-    var articlesPublisher: Published<[ArticleModel]>.Publisher { get }
-    
-    func viewDidLoad()
+enum ArticleSearchViewEvent {
+    case viewDidLoad
 }
 
-final class ArticleSearchPresenter {
+protocol ArticleSearchPresentation: Presentation where ViewEvent == ArticleSearchViewEvent {
+    var articles: [ArticleModel] { get }
+    var articlesPublisher: Published<[ArticleModel]>.Publisher { get }
+}
+
+final class ArticleSearchPresenter: ArticleSearchPresentation {
+    let viewEventSubject = PassthroughSubject<ArticleSearchViewEvent, Never>()
+    
     private var cancellables: Set<AnyCancellable> = []
-    private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
+    private let searchKeywordSubject = PassthroughSubject<String, Never>()
     
     @Published var articles: [ArticleModel] = []
     var articlesPublisher: Published<[ArticleModel]>.Publisher { $articles }
@@ -28,20 +33,22 @@ final class ArticleSearchPresenter {
         router: Router,
         articleSearchInteractor: ArticleSearchInteractor
     ) {
-        viewDidLoadSubject
-            .flatMap {
+        viewEventSubject
+            .sink { event in
+                switch event {
+                case .viewDidLoad:
+                    self.searchKeywordSubject.send("Swift")
+                }
+            }.store(in: &cancellables)
+        
+        searchKeywordSubject
+            .flatMap { searchKeyword in
                 articleSearchInteractor
-                    .execute("Swift")
+                    .execute(searchKeyword)
                     .catch { _ in
                         Empty()
                     }
             }.assign(to: \.articles, on: self)
             .store(in: &cancellables)
-    }
-}
-
-extension ArticleSearchPresenter: ArticleSearchPresentation {
-    func viewDidLoad() {
-        viewDidLoadSubject.send()
     }
 }

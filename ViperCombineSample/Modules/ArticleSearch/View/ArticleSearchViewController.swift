@@ -8,12 +8,13 @@
 import UIKit
 import Combine
 
-class ArticleSearchViewController: UIViewController {
-    var presenter: ArticleSearchPresentation!
+class ArticleSearchViewController<Presenter: ArticleSearchPresentation>: UIViewController {
+    var presenter: Presenter!
     
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+            tableView.dataSource = dataSource
         }
     }
     private lazy var dataSource = UITableViewDiffableDataSource<Int, ArticleModel>(tableView: tableView) { tableView, indexPath, article -> UITableViewCell? in
@@ -23,7 +24,15 @@ class ArticleSearchViewController: UIViewController {
     }
     
     private var cancellables: Set<AnyCancellable> = []
-
+    
+    init() {
+        super.init(nibName: Self.nibName, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,6 +44,6 @@ class ArticleSearchViewController: UIViewController {
                 self.dataSource.apply(snapshot, animatingDifferences: true)
             }.store(in: &cancellables)
         
-        presenter.viewDidLoad()
+        presenter.viewEventSubject.send(.viewDidLoad)
     }
 }

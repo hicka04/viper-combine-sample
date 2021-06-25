@@ -10,8 +10,8 @@ import Combine
 
 enum QiitaRepositoryError: Error {
     case connectionError(Error)
+    case requestError(Error)
     case responseError(Error)
-    case logicFailure(Error)
 }
 
 protocol QiitaRepository: AnyObject {

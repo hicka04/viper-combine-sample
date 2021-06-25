@@ -37,7 +37,7 @@ extension QiitaDataStore: QiitaRepository {
                     return .responseError(error)
                     
                 case .requestError(let error):
-                    return .logicFailure(error)
+                    return .requestError(error)
                 }
             }.eraseToAnyPublisher()
     }

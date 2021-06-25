@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol UsecaseError: Error {
+protocol UsecaseError: Error, Equatable {
     var message: String { get }
 }
 

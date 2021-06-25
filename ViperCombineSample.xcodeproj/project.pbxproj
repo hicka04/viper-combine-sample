@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B81436D8266BC1F00086C14A /* ArticleSearchPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81436D7266BC1F00086C14A /* ArticleSearchPresenterTests.swift */; };
+		B81436DB266BC29E0086C14A /* EntwineTest in Frameworks */ = {isa = PBXBuildFile; productRef = B81436DA266BC29E0086C14A /* EntwineTest */; };
+		B81436E1266BC48E0086C14A /* MockArticleSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81436E0266BC48E0086C14A /* MockArticleSearchInteractor.swift */; };
 		B82B82292657E51B000EA62C /* ArticleSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B82272657E51B000EA62C /* ArticleSearchViewController.swift */; };
 		B82B822A2657E51B000EA62C /* ArticleSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82B82282657E51B000EA62C /* ArticleSearchViewController.xib */; };
 		B82B822E2657E671000EA62C /* ArticleSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B822D2657E671000EA62C /* ArticleSearchPresenter.swift */; };
@@ -49,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B81436D7266BC1F00086C14A /* ArticleSearchPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchPresenterTests.swift; sourceTree = "<group>"; };
+		B81436E0266BC48E0086C14A /* MockArticleSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockArticleSearchInteractor.swift; sourceTree = "<group>"; };
 		B82B82272657E51B000EA62C /* ArticleSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchViewController.swift; sourceTree = "<group>"; };
 		B82B82282657E51B000EA62C /* ArticleSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleSearchViewController.xib; sourceTree = "<group>"; };
 		B82B822D2657E671000EA62C /* ArticleSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchPresenter.swift; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B82B826926628FD6000EA62C /* Nimble in Frameworks */,
+				B81436DB266BC29E0086C14A /* EntwineTest in Frameworks */,
 				B82B826626628FBA000EA62C /* Quick in Frameworks */,
 				B82B826326628E58000EA62C /* OHHTTPStubsSwift in Frameworks */,
 			);
@@ -102,6 +108,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B81436D5266BC1C90086C14A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B81436D6266BC1DB0086C14A /* ArticleSearch */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B81436D6266BC1DB0086C14A /* ArticleSearch */ = {
+			isa = PBXGroup;
+			children = (
+				B81436D7266BC1F00086C14A /* ArticleSearchPresenterTests.swift */,
+			);
+			path = ArticleSearch;
+			sourceTree = "<group>";
+		};
+		B81436DC266BC45A0086C14A /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B81436DD266BC4640086C14A /* Domain */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		B81436DD266BC4640086C14A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B81436DE266BC46D0086C14A /* Usecases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		B81436DE266BC46D0086C14A /* Usecases */ = {
+			isa = PBXGroup;
+			children = (
+				B81436DF266BC4790086C14A /* ArticleSearch */,
+			);
+			path = Usecases;
+			sourceTree = "<group>";
+		};
+		B81436DF266BC4790086C14A /* ArticleSearch */ = {
+			isa = PBXGroup;
+			children = (
+				B81436E0266BC48E0086C14A /* MockArticleSearchInteractor.swift */,
+			);
+			path = ArticleSearch;
+			sourceTree = "<group>";
+		};
 		B82B821E2657E071000EA62C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +402,8 @@
 			children = (
 				B87414E82657DFBD0061A031 /* Info.plist */,
 				B88DB0F62667A30B00864021 /* Application */,
+				B81436D5266BC1C90086C14A /* Modules */,
+				B81436DC266BC45A0086C14A /* Mocks */,
 			);
 			path = ViperCombineSampleTests;
 			sourceTree = "<group>";
@@ -418,6 +474,7 @@
 				B82B826226628E58000EA62C /* OHHTTPStubsSwift */,
 				B82B826526628FBA000EA62C /* Quick */,
 				B82B826826628FD6000EA62C /* Nimble */,
+				B81436DA266BC29E0086C14A /* EntwineTest */,
 			);
 			productName = ViperCombineSampleTests;
 			productReference = B87414E22657DFBD0061A031 /* ViperCombineSampleTests.xctest */;
@@ -455,6 +512,7 @@
 				B82B826126628E58000EA62C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 				B82B826426628FBA000EA62C /* XCRemoteSwiftPackageReference "Quick" */,
 				B82B826726628FD6000EA62C /* XCRemoteSwiftPackageReference "Nimble" */,
+				B81436D9266BC29E0086C14A /* XCRemoteSwiftPackageReference "Entwine" */,
 			);
 			productRefGroup = B87414CD2657DFBC0061A031 /* Products */;
 			projectDirPath = "";
@@ -519,7 +577,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B81436E1266BC48E0086C14A /* MockArticleSearchInteractor.swift in Sources */,
 				B88DB0F92667A32B00864021 /* AppPresenterTests.swift in Sources */,
+				B81436D8266BC1F00086C14A /* ArticleSearchPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +834,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B81436D9266BC29E0086C14A /* XCRemoteSwiftPackageReference "Entwine" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tcldr/Entwine.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.1;
+			};
+		};
 		B82B82512661F72C000EA62C /* XCRemoteSwiftPackageReference "APIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ishkawa/APIKit.git";
@@ -809,6 +877,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B81436DA266BC29E0086C14A /* EntwineTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B81436D9266BC29E0086C14A /* XCRemoteSwiftPackageReference "Entwine" */;
+			productName = EntwineTest;
+		};
 		B82B82522661F72C000EA62C /* APIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B82B82512661F72C000EA62C /* XCRemoteSwiftPackageReference "APIKit" */;

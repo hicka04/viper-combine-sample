@@ -37,6 +37,7 @@
 		B87414DC2657DFBD0061A031 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87414DA2657DFBD0061A031 /* LaunchScreen.storyboard */; };
 		B8895DD12685A9570071825A /* ArticleSearchInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DD02685A9570071825A /* ArticleSearchInteractorTests.swift */; };
 		B8895DD62685ABF90071825A /* MockQiitaDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DD52685ABF90071825A /* MockQiitaDataStore.swift */; };
+		B8895DDC2688391F0071825A /* QiitaDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DDB2688391F0071825A /* QiitaDataStoreTests.swift */; };
 		B88DB0F92667A32B00864021 /* AppPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88DB0F82667A32B00864021 /* AppPresenterTests.swift */; };
 		B88DB0FD2667B93300864021 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88DB0FC2667B93300864021 /* Presentation.swift */; };
 		B88DB1002669103F00864021 /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88DB0FF2669103F00864021 /* NSObject+extension.swift */; };
@@ -83,6 +84,7 @@
 		B87414E82657DFBD0061A031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8895DD02685A9570071825A /* ArticleSearchInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchInteractorTests.swift; sourceTree = "<group>"; };
 		B8895DD52685ABF90071825A /* MockQiitaDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockQiitaDataStore.swift; sourceTree = "<group>"; };
+		B8895DDB2688391F0071825A /* QiitaDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaDataStoreTests.swift; sourceTree = "<group>"; };
 		B88DB0F82667A32B00864021 /* AppPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresenterTests.swift; sourceTree = "<group>"; };
 		B88DB0FC2667B93300864021 /* Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
 		B88DB0FF2669103F00864021 /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				B88DB0F62667A30B00864021 /* Application */,
 				B81436D5266BC1C90086C14A /* Modules */,
 				B8895DCD2685A92D0071825A /* Domain */,
+				B8895DD7268838F60071825A /* Infra */,
 				B81436DC266BC45A0086C14A /* Mocks */,
 			);
 			path = ViperCombineSampleTests;
@@ -458,6 +461,30 @@
 			isa = PBXGroup;
 			children = (
 				B8895DD52685ABF90071825A /* MockQiitaDataStore.swift */,
+			);
+			path = Qiita;
+			sourceTree = "<group>";
+		};
+		B8895DD7268838F60071825A /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				B8895DD8268839010071825A /* Repositories */,
+			);
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		B8895DD8268839010071825A /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				B8895DD92688390A0071825A /* Qiita */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		B8895DD92688390A0071825A /* Qiita */ = {
+			isa = PBXGroup;
+			children = (
+				B8895DDB2688391F0071825A /* QiitaDataStoreTests.swift */,
 			);
 			path = Qiita;
 			sourceTree = "<group>";
@@ -631,6 +658,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8895DDC2688391F0071825A /* QiitaDataStoreTests.swift in Sources */,
 				B81436E1266BC48E0086C14A /* MockArticleSearchInteractor.swift in Sources */,
 				B8895DD12685A9570071825A /* ArticleSearchInteractorTests.swift in Sources */,
 				B88DB0F92667A32B00864021 /* AppPresenterTests.swift in Sources */,

@@ -8,10 +8,22 @@
 import Foundation
 import Combine
 
-enum QiitaRepositoryError: Error {
+enum QiitaRepositoryError: Error, Equatable {
     case connectionError(Error)
     case requestError(Error)
     case responseError(Error)
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.connectionError, connectionError),
+             (.requestError, .requestError),
+             (.responseError, .responseError):
+            return true
+            
+        default:
+            return false
+        }
+    }
 }
 
 protocol QiitaRepository: AnyObject {

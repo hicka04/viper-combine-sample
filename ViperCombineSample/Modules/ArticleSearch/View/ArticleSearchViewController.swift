@@ -37,11 +37,11 @@ class ArticleSearchViewController<Presenter: ArticleSearchPresentation>: UIViewC
         super.viewDidLoad()
         
         presenter.articlesPublisher
-            .sink { articles in
+            .sink { [weak self] articles in
                 var snapshot = NSDiffableDataSourceSnapshot<Int, ArticleModel>()
                 snapshot.appendSections([0])
                 snapshot.appendItems(articles, toSection: 0)
-                self.dataSource.apply(snapshot, animatingDifferences: true)
+                self?.dataSource.apply(snapshot, animatingDifferences: true)
             }.store(in: &cancellables)
         
         presenter.viewEventSubject.send(.viewDidLoad)

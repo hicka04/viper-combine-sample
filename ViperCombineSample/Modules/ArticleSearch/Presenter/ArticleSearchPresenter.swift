@@ -18,13 +18,13 @@ protocol ArticleSearchPresentation: Presentation where ViewEvent == ArticleSearc
 }
 
 final class ArticleSearchPresenter: ArticleSearchPresentation {
-    let viewEventSubject = PassthroughSubject<ArticleSearchViewEvent, Never>()
-    
     private var cancellables: Set<AnyCancellable> = []
-    private let searchKeywordSubject = PassthroughSubject<String, Never>()
+    let viewEventSubject = PassthroughSubject<ArticleSearchViewEvent, Never>()
     
     @Published var articles: [ArticleModel] = []
     var articlesPublisher: Published<[ArticleModel]>.Publisher { $articles }
+
+    @Published var articleSearchError: ArticleSearchError?
     
     init<
         Router: ArticleSearchWireframe,
@@ -33,22 +33,27 @@ final class ArticleSearchPresenter: ArticleSearchPresentation {
         router: Router,
         articleSearchInteractor: ArticleSearchInteractor
     ) {
+        let searchKeywordSubject = PassthroughSubject<String, Never>()
+        
         viewEventSubject
             .sink { event in
                 switch event {
                 case .viewDidLoad:
-                    self.searchKeywordSubject.send("Swift")
+                    searchKeywordSubject.send("Swift")
                 }
             }.store(in: &cancellables)
         
         searchKeywordSubject
+            .setFailureType(to: ArticleSearchError.self)
             .flatMap { searchKeyword in
-                articleSearchInteractor
-                    .execute(searchKeyword)
-                    .catch { _ in
-                        Empty()
-                    }
-            }.assign(to: \.articles, on: self)
-            .store(in: &cancellables)
+                articleSearchInteractor.execute(searchKeyword)
+            }.subscribe(on: DispatchQueue.global())
+            .receive(on: DispatchQueue.main)
+            .catch { [weak self] error -> Empty<[ArticleModel], Never> in
+                self?.articleSearchError = error
+                return .init()
+            }.sink { [weak self] articles in
+                self?.articles = articles
+            }.store(in: &cancellables)
     }
 }

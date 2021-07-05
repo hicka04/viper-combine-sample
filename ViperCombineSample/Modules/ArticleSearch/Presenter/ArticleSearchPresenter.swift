@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CombineSchedulers
 
 enum ArticleSearchViewEvent {
     case viewDidLoad
@@ -23,6 +24,7 @@ final class ArticleSearchPresenter: Presentation {
         Router: ArticleSearchWireframe,
         ArticleSearchInteractor: ArticleSearchUsecase
     >(
+        mainScheduler: AnySchedulerOf<DispatchQueue> = .main,
         router: Router,
         articleSearchInteractor: ArticleSearchInteractor
     ) {
@@ -41,8 +43,7 @@ final class ArticleSearchPresenter: Presentation {
                 articleSearchInteractor
                     .execute(searchKeyword)
                     .convertToResultPublisher()
-            }.subscribe(on: DispatchQueue.global())
-            .receive(on: DispatchQueue.main)
+            }.receive(on: mainScheduler)
             .sink { [weak self] result in
                 switch result {
                 case .success(let articles):

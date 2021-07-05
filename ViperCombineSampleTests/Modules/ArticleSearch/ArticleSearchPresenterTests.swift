@@ -9,10 +9,11 @@
 import Quick
 import Nimble
 import EntwineTest
+import CombineSchedulers
 
 final class ArticleSearchPresenterTests: QuickSpec {
     override func spec() {
-        var testScheduler: TestScheduler!
+        var testScheduler: EntwineTest.TestScheduler!
         var articlesSubscriber: TestableSubscriber<[ArticleModel], Never>!
         
         var presenter: ArticleSearchPresenter!
@@ -26,6 +27,7 @@ final class ArticleSearchPresenterTests: QuickSpec {
             router = .init()
             articleSearchInteractor = .init()
             presenter = .init(
+                mainScheduler: .immediate,
                 router: router,
                 articleSearchInteractor: articleSearchInteractor
             )

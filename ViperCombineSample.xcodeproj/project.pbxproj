@@ -36,6 +36,7 @@
 		B87414D92657DFBD0061A031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87414D82657DFBD0061A031 /* Assets.xcassets */; };
 		B87414DC2657DFBD0061A031 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87414DA2657DFBD0061A031 /* LaunchScreen.storyboard */; };
 		B87B5F1F2692872C00CBB587 /* Combine.Publisher+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87B5F1E2692872C00CBB587 /* Combine.Publisher+extension.swift */; };
+		B87B5F222692892400CBB587 /* CombineSchedulers in Frameworks */ = {isa = PBXBuildFile; productRef = B87B5F212692892400CBB587 /* CombineSchedulers */; };
 		B8895DD12685A9570071825A /* ArticleSearchInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DD02685A9570071825A /* ArticleSearchInteractorTests.swift */; };
 		B8895DD62685ABF90071825A /* MockQiitaDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DD52685ABF90071825A /* MockQiitaDataStore.swift */; };
 		B8895DDC2688391F0071825A /* QiitaDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DDB2688391F0071825A /* QiitaDataStoreTests.swift */; };
@@ -94,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B87B5F222692892400CBB587 /* CombineSchedulers in Frameworks */,
 				B82B82532661F72C000EA62C /* APIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +523,7 @@
 			name = ViperCombineSample;
 			packageProductDependencies = (
 				B82B82522661F72C000EA62C /* APIKit */,
+				B87B5F212692892400CBB587 /* CombineSchedulers */,
 			);
 			productName = ViperCombineSample;
 			productReference = B87414CC2657DFBC0061A031 /* ViperCombineSample.app */;
@@ -583,6 +586,7 @@
 				B82B826426628FBA000EA62C /* XCRemoteSwiftPackageReference "Quick" */,
 				B82B826726628FD6000EA62C /* XCRemoteSwiftPackageReference "Nimble" */,
 				B81436D9266BC29E0086C14A /* XCRemoteSwiftPackageReference "Entwine" */,
+				B87B5F202692892400CBB587 /* XCRemoteSwiftPackageReference "combine-schedulers" */,
 			);
 			productRefGroup = B87414CD2657DFBC0061A031 /* Products */;
 			projectDirPath = "";
@@ -946,6 +950,14 @@
 				minimumVersion = 9.2.0;
 			};
 		};
+		B87B5F202692892400CBB587 /* XCRemoteSwiftPackageReference "combine-schedulers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/combine-schedulers.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -973,6 +985,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B82B826726628FD6000EA62C /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
+		};
+		B87B5F212692892400CBB587 /* CombineSchedulers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B87B5F202692892400CBB587 /* XCRemoteSwiftPackageReference "combine-schedulers" */;
+			productName = CombineSchedulers;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

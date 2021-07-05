@@ -35,6 +35,7 @@
 		B87414D22657DFBC0061A031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87414D12657DFBC0061A031 /* SceneDelegate.swift */; };
 		B87414D92657DFBD0061A031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87414D82657DFBD0061A031 /* Assets.xcassets */; };
 		B87414DC2657DFBD0061A031 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87414DA2657DFBD0061A031 /* LaunchScreen.storyboard */; };
+		B87B5F1F2692872C00CBB587 /* Combine.Publisher+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87B5F1E2692872C00CBB587 /* Combine.Publisher+extension.swift */; };
 		B8895DD12685A9570071825A /* ArticleSearchInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DD02685A9570071825A /* ArticleSearchInteractorTests.swift */; };
 		B8895DD62685ABF90071825A /* MockQiitaDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DD52685ABF90071825A /* MockQiitaDataStore.swift */; };
 		B8895DDC2688391F0071825A /* QiitaDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DDB2688391F0071825A /* QiitaDataStoreTests.swift */; };
@@ -80,6 +81,7 @@
 		B87414DD2657DFBD0061A031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B87414E22657DFBD0061A031 /* ViperCombineSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViperCombineSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B87414E82657DFBD0061A031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B87B5F1E2692872C00CBB587 /* Combine.Publisher+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine.Publisher+extension.swift"; sourceTree = "<group>"; };
 		B8895DD02685A9570071825A /* ArticleSearchInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchInteractorTests.swift; sourceTree = "<group>"; };
 		B8895DD52685ABF90071825A /* MockQiitaDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockQiitaDataStore.swift; sourceTree = "<group>"; };
 		B8895DDB2688391F0071825A /* QiitaDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaDataStoreTests.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				B82B825C2661F9BB000EA62C /* APIKit+extension.swift */,
+				B87B5F1E2692872C00CBB587 /* Combine.Publisher+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				B87414D22657DFBC0061A031 /* SceneDelegate.swift in Sources */,
 				B88DB0FD2667B93300864021 /* Presentation.swift in Sources */,
 				B82B82462657F273000EA62C /* UsecaseError.swift in Sources */,
+				B87B5F1F2692872C00CBB587 /* Combine.Publisher+extension.swift in Sources */,
 				B82B82442657F255000EA62C /* Usecase.swift in Sources */,
 				B82B82292657E51B000EA62C /* ArticleSearchViewController.swift in Sources */,
 				B82B824E2661F64A000EA62C /* QiitaRepository.swift in Sources */,

@@ -21,7 +21,7 @@ final class ArticleSearchRouter {
     }
     
     static func assembleModules() -> UIViewController {
-        let view = ArticleSearchViewController<ArticleSearchPresenter>()
+        let view = ArticleSearchViewController()
         let router = ArticleSearchRouter(viewController: view)
         let qiitaDataStore = QiitaDataStore()
         let articleSearchInteractor = ArticleSearchInteractor(qiitaRepository: qiitaDataStore)

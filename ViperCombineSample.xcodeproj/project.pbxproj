@@ -40,8 +40,6 @@
 		B8895DDC2688391F0071825A /* QiitaDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8895DDB2688391F0071825A /* QiitaDataStoreTests.swift */; };
 		B88DB0F92667A32B00864021 /* AppPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88DB0F82667A32B00864021 /* AppPresenterTests.swift */; };
 		B88DB0FD2667B93300864021 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88DB0FC2667B93300864021 /* Presentation.swift */; };
-		B88DB1002669103F00864021 /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88DB0FF2669103F00864021 /* NSObject+extension.swift */; };
-		B88DB102266910DC00864021 /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88DB101266910DC00864021 /* UIViewController+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,8 +85,6 @@
 		B8895DDB2688391F0071825A /* QiitaDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaDataStoreTests.swift; sourceTree = "<group>"; };
 		B88DB0F82667A32B00864021 /* AppPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresenterTests.swift; sourceTree = "<group>"; };
 		B88DB0FC2667B93300864021 /* Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
-		B88DB0FF2669103F00864021 /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
-		B88DB101266910DC00864021 /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,7 +394,6 @@
 				B82B823B2657EEA8000EA62C /* Domain */,
 				B82B82492661F5FC000EA62C /* Infra */,
 				B82B822C2657E53D000EA62C /* Resources */,
-				B88DB0FE2669102500864021 /* Extensions */,
 				B82B823A2657EB97000EA62C /* VIPER */,
 			);
 			path = ViperCombineSample;
@@ -503,15 +498,6 @@
 				B88DB0F82667A32B00864021 /* AppPresenterTests.swift */,
 			);
 			path = Delegate;
-			sourceTree = "<group>";
-		};
-		B88DB0FE2669102500864021 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				B88DB0FF2669103F00864021 /* NSObject+extension.swift */,
-				B88DB101266910DC00864021 /* UIViewController+extension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -632,7 +618,6 @@
 			files = (
 				B82B82502661F6B3000EA62C /* QiitaDataStore.swift in Sources */,
 				B82B82602661FBD7000EA62C /* ArticleEntity.swift in Sources */,
-				B88DB102266910DC00864021 /* UIViewController+extension.swift in Sources */,
 				B87414D02657DFBC0061A031 /* AppDelegate.swift in Sources */,
 				B82B82422657EFB6000EA62C /* ArticleSearchInteractor.swift in Sources */,
 				B82B825D2661F9BB000EA62C /* APIKit+extension.swift in Sources */,
@@ -646,7 +631,6 @@
 				B87414D22657DFBC0061A031 /* SceneDelegate.swift in Sources */,
 				B88DB0FD2667B93300864021 /* Presentation.swift in Sources */,
 				B82B82462657F273000EA62C /* UsecaseError.swift in Sources */,
-				B88DB1002669103F00864021 /* NSObject+extension.swift in Sources */,
 				B82B82442657F255000EA62C /* Usecase.swift in Sources */,
 				B82B82292657E51B000EA62C /* ArticleSearchViewController.swift in Sources */,
 				B82B824E2661F64A000EA62C /* QiitaRepository.swift in Sources */,

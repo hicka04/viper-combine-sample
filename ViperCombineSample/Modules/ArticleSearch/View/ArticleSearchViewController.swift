@@ -8,8 +8,10 @@
 import UIKit
 import Combine
 
-class ArticleSearchViewController<Presenter: ArticleSearchPresentation>: UIViewController {
-    var presenter: Presenter!
+class ArticleSearchViewController: UIViewController {
+    var presenter: ArticleSearchPresenter!
+    
+    private var cancellables: Set<AnyCancellable> = []
     
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -23,20 +25,10 @@ class ArticleSearchViewController<Presenter: ArticleSearchPresentation>: UIViewC
         return cell
     }
     
-    private var cancellables: Set<AnyCancellable> = []
-    
-    init() {
-        super.init(nibName: Self.nibName, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.articlesPublisher
+        presenter.$articles
             .sink { [weak self] articles in
                 var snapshot = NSDiffableDataSourceSnapshot<Int, ArticleModel>()
                 snapshot.appendSections([0])

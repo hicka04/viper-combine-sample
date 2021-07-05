@@ -12,18 +12,11 @@ enum ArticleSearchViewEvent {
     case viewDidLoad
 }
 
-protocol ArticleSearchPresentation: Presentation where ViewEvent == ArticleSearchViewEvent {
-    var articles: [ArticleModel] { get }
-    var articlesPublisher: Published<[ArticleModel]>.Publisher { get }
-}
-
-final class ArticleSearchPresenter: ArticleSearchPresentation {
+final class ArticleSearchPresenter: Presentation {
     private var cancellables: Set<AnyCancellable> = []
     let viewEventSubject = PassthroughSubject<ArticleSearchViewEvent, Never>()
     
     @Published var articles: [ArticleModel] = []
-    var articlesPublisher: Published<[ArticleModel]>.Publisher { $articles }
-
     @Published var articleSearchError: ArticleSearchError?
     
     init<

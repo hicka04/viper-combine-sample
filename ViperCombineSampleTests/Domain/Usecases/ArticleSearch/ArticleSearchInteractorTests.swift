@@ -9,44 +9,58 @@
 import Foundation
 import Quick
 import Nimble
-import EntwineTest
+import Combine
+import CombineSchedulers
 
 final class ArticleSearchInteractorTests: QuickSpec {
     override func spec() {
-        var testScheduler: TestScheduler!
-        var testableSubscriber: TestableSubscriber<ArticleSearchInteractor.Output, ArticleSearchInteractor.Failure>!
+        var cancellables: Set<AnyCancellable> = []
+        var testScheduler: TestSchedulerOf<DispatchQueue>!
+        var executeOutputs: [Result<ArticleSearchInteractor.Output, ArticleSearchInteractor.Failure>] = []
         
         var interactor: ArticleSearchInteractor!
         var qiitaDataStore: MockQiitaDataStore!
+        
+        let input: ArticleSearchInteractor.Input = "Swift"
         let error = NSError(domain: "hoge", code: -1, userInfo: nil)
         
         beforeEach {
-            testScheduler = .init(initialClock: 0)
-            testableSubscriber = testScheduler.createTestableSubscriber(ArticleSearchInteractor.Output.self, ArticleSearchInteractor.Failure.self)
+            testScheduler = DispatchQueue.test
             
             qiitaDataStore = .init()
             interactor = .init(qiitaRepository: qiitaDataStore)
         }
         
+        afterEach {
+            cancellables = []
+            executeOutputs = []
+        }
+        
         describe("execute") {
+            beforeEach {
+                testScheduler.schedule {
+                    interactor.execute(input)
+                        .convertToResultPublisher()
+                        .sink { executeOutputs.append($0) }
+                        .store(in: &cancellables)
+                }
+            }
             context("dataStoreの返却値がconnectionErrorのとき") {
                 let connectionError: QiitaRepositoryError = .connectionError(error)
                 
                 beforeEach {
-                    qiitaDataStore.searchArticlesResult = testScheduler.createRelativeTestablePublisher([
-                        (10, .completion(.failure(connectionError)))
-                    ]).eraseToAnyPublisher()
+                    qiitaDataStore.searchArticlesResult = Future { promise in
+                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                            promise(.failure(connectionError))
+                        }
+                    }.eraseToAnyPublisher()
                     
-                    interactor.execute("Swift")
-                        .subscribe(testableSubscriber)
-                    
-                    testScheduler.resume()
+                    testScheduler.advance(by: 10)
                 }
                 
                 it("エラーが返却される") {
-                    expect(testableSubscriber.recordedOutput) == [
-                        (0, .subscription),
-                        (10, .completion(.failure(.init(error: connectionError))))
+                    expect(executeOutputs) == [
+                        .failure(.init(error: connectionError))
                     ]
                 }
             }
@@ -55,20 +69,18 @@ final class ArticleSearchInteractorTests: QuickSpec {
                 let requestError: QiitaRepositoryError = .requestError(error)
                 
                 beforeEach {
-                    qiitaDataStore.searchArticlesResult = testScheduler.createRelativeTestablePublisher([
-                        (10, .completion(.failure(requestError)))
-                    ]).eraseToAnyPublisher()
+                    qiitaDataStore.searchArticlesResult = Future { promise in
+                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                            promise(.failure(requestError))
+                        }
+                    }.eraseToAnyPublisher()
                     
-                    interactor.execute("Swift")
-                        .subscribe(testableSubscriber)
-                    
-                    testScheduler.resume()
+                    testScheduler.advance(by: 10)
                 }
                 
                 it("エラーが返却される") {
-                    expect(testableSubscriber.recordedOutput) == [
-                        (0, .subscription),
-                        (10, .completion(.failure(.init(error: requestError))))
+                    expect(executeOutputs) == [
+                        .failure(.init(error: requestError))
                     ]
                 }
             }
@@ -77,20 +89,18 @@ final class ArticleSearchInteractorTests: QuickSpec {
                 let responseError: QiitaRepositoryError = .responseError(error)
                 
                 beforeEach {
-                    qiitaDataStore.searchArticlesResult = testScheduler.createRelativeTestablePublisher([
-                        (10, .completion(.failure(responseError)))
-                    ]).eraseToAnyPublisher()
+                    qiitaDataStore.searchArticlesResult = Future { promise in
+                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                            promise(.failure(responseError))
+                        }
+                    }.eraseToAnyPublisher()
                     
-                    interactor.execute("Swift")
-                        .subscribe(testableSubscriber)
-                    
-                    testScheduler.resume()
+                    testScheduler.advance(by: 10)
                 }
                 
                 it("エラーが返却される") {
-                    expect(testableSubscriber.recordedOutput) == [
-                        (0, .subscription),
-                        (10, .completion(.failure(.init(error: responseError))))
+                    expect(executeOutputs) == [
+                        .failure(.init(error: responseError))
                     ]
                 }
             }
@@ -101,20 +111,18 @@ final class ArticleSearchInteractorTests: QuickSpec {
                 ]
                 
                 beforeEach {
-                    qiitaDataStore.searchArticlesResult = testScheduler.createRelativeTestablePublisher([
-                        (10, .input(response))
-                    ]).eraseToAnyPublisher()
+                    qiitaDataStore.searchArticlesResult = Future { promise in
+                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                            promise(.success(response))
+                        }
+                    }.eraseToAnyPublisher()
                     
-                    interactor.execute("Swift")
-                        .subscribe(testableSubscriber)
-                    
-                    testScheduler.resume()
+                    testScheduler.advance(by: 10)
                 }
                 
                 it("[ArticleModel]が返却される") {
-                    expect(testableSubscriber.recordedOutput) == [
-                        (0, .subscription),
-                        (10, .input(response))
+                    expect(executeOutputs) == [
+                        .success(response)
                     ]
                 }
             }

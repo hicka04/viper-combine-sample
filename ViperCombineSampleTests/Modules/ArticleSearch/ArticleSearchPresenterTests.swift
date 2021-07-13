@@ -8,21 +8,19 @@
 @testable import ViperCombineSample
 import Quick
 import Nimble
-import EntwineTest
+import Combine
 import CombineSchedulers
 
 final class ArticleSearchPresenterTests: QuickSpec {
     override func spec() {
-        var testScheduler: EntwineTest.TestScheduler!
-        var articlesSubscriber: TestableSubscriber<[ArticleModel], Never>!
+        var testScheduler: TestSchedulerOf<DispatchQueue>!
         
         var presenter: ArticleSearchPresenter!
         var router: MockArticleSearchRouter!
         var articleSearchInteractor: MockArticleSearchInteractor!
         
         beforeEach {
-            testScheduler = .init(initialClock: 0)
-            articlesSubscriber = testScheduler.createTestableSubscriber([ArticleModel].self, Never.self)
+            testScheduler = DispatchQueue.test
             
             router = .init()
             articleSearchInteractor = .init()
@@ -31,8 +29,6 @@ final class ArticleSearchPresenterTests: QuickSpec {
                 router: router,
                 articleSearchInteractor: articleSearchInteractor
             )
-            
-            presenter.$articles.subscribe(articlesSubscriber)
         }
         
         describe("viewDidLoad") {
@@ -41,21 +37,19 @@ final class ArticleSearchPresenterTests: QuickSpec {
             ]
             
             beforeEach {
-                articleSearchInteractor.executeResult = testScheduler.createRelativeTestablePublisher([
-                    (10, .input(articles))
-                ]).eraseToAnyPublisher()
+                articleSearchInteractor.executeResult = Future { promise in
+                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                        promise(.success(articles))
+                    }
+                }.eraseToAnyPublisher()
                 
-                testScheduler.schedule(after: 10) { presenter.viewEventSubject.send(.viewDidLoad) }
-                
-                testScheduler.resume()
+                presenter.viewEventSubject.send(.viewDidLoad)
             }
             
             it("articlesが更新される") {
-                expect(articlesSubscriber.recordedOutput) == [
-                    (0, .subscription),
-                    (0, .input([])),
-                    (20, .input(articles))
-                ]
+                expect(presenter.articles) == []
+                testScheduler.advance(by: 10)
+                expect(presenter.articles) == articles
             }
         }
     }

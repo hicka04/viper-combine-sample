@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B81436D8266BC1F00086C14A /* ArticleSearchPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81436D7266BC1F00086C14A /* ArticleSearchPresenterTests.swift */; };
-		B81436DB266BC29E0086C14A /* EntwineTest in Frameworks */ = {isa = PBXBuildFile; productRef = B81436DA266BC29E0086C14A /* EntwineTest */; };
 		B81436E1266BC48E0086C14A /* MockArticleSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81436E0266BC48E0086C14A /* MockArticleSearchInteractor.swift */; };
 		B82B82292657E51B000EA62C /* ArticleSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B82272657E51B000EA62C /* ArticleSearchViewController.swift */; };
 		B82B822A2657E51B000EA62C /* ArticleSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B82B82282657E51B000EA62C /* ArticleSearchViewController.xib */; };
@@ -105,7 +104,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B82B826926628FD6000EA62C /* Nimble in Frameworks */,
-				B81436DB266BC29E0086C14A /* EntwineTest in Frameworks */,
 				B82B826626628FBA000EA62C /* Quick in Frameworks */,
 				B82B826326628E58000EA62C /* OHHTTPStubsSwift in Frameworks */,
 			);
@@ -547,7 +545,6 @@
 				B82B826226628E58000EA62C /* OHHTTPStubsSwift */,
 				B82B826526628FBA000EA62C /* Quick */,
 				B82B826826628FD6000EA62C /* Nimble */,
-				B81436DA266BC29E0086C14A /* EntwineTest */,
 			);
 			productName = ViperCombineSampleTests;
 			productReference = B87414E22657DFBD0061A031 /* ViperCombineSampleTests.xctest */;
@@ -585,7 +582,6 @@
 				B82B826126628E58000EA62C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 				B82B826426628FBA000EA62C /* XCRemoteSwiftPackageReference "Quick" */,
 				B82B826726628FD6000EA62C /* XCRemoteSwiftPackageReference "Nimble" */,
-				B81436D9266BC29E0086C14A /* XCRemoteSwiftPackageReference "Entwine" */,
 				B87B5F202692892400CBB587 /* XCRemoteSwiftPackageReference "combine-schedulers" */,
 			);
 			productRefGroup = B87414CD2657DFBC0061A031 /* Products */;
@@ -910,14 +906,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B81436D9266BC29E0086C14A /* XCRemoteSwiftPackageReference "Entwine" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/tcldr/Entwine.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.1;
-			};
-		};
 		B82B82512661F72C000EA62C /* XCRemoteSwiftPackageReference "APIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ishkawa/APIKit.git";
@@ -961,11 +949,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B81436DA266BC29E0086C14A /* EntwineTest */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B81436D9266BC29E0086C14A /* XCRemoteSwiftPackageReference "Entwine" */;
-			productName = EntwineTest;
-		};
 		B82B82522661F72C000EA62C /* APIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B82B82512661F72C000EA62C /* XCRemoteSwiftPackageReference "APIKit" */;

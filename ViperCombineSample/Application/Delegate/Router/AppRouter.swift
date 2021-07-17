@@ -6,18 +6,29 @@
 //
 
 import UIKit
+import Combine
 
 enum AppDestination {
     case artcileSearch
 }
 
-protocol AppWireframe: Wireframe where Destination == AppDestination {}
+protocol AppWireframe: AnyObject {
+    var navigationSubject: PassthroughSubject<AppDestination, Never>  { get }
+}
 
-final class AppRouter {
-    private let window: UIWindow
+final class AppRouter: AppWireframe {
+    private var cancellables: Set<AnyCancellable> = []
+    let navigationSubject = PassthroughSubject<AppDestination, Never>()
     
     private init(window: UIWindow) {
-        self.window = window
+        navigationSubject
+            .sink { destination in
+                switch destination {
+                case .artcileSearch:
+                    window.rootViewController = UINavigationController(rootViewController: ArticleSearchRouter.assembleModules())
+                    window.makeKeyAndVisible()
+                }
+            }.store(in: &cancellables)
     }
     
     static func assembleModules(windowScene: UIWindowScene) -> AppPresentation {
@@ -25,12 +36,5 @@ final class AppRouter {
         let presenter = AppPresenter(router: router)
         
         return presenter
-    }
-}
-
-extension AppRouter: AppWireframe {
-    func navigatie(to destination: AppDestination) {
-        window.rootViewController = UINavigationController(rootViewController: ArticleSearchRouter.assembleModules())
-        window.makeKeyAndVisible()
     }
 }

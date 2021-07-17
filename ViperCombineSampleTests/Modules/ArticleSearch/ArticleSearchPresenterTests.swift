@@ -57,12 +57,6 @@ final class ArticleSearchPresenterTests: QuickSpec {
 
 extension ArticleSearchPresenterTests {
     final class MockArticleSearchRouter: ArticleSearchWireframe {
-        private(set) var navigateCallArguments: [ArticleSearchDestination] = []
-        var navigateCallCount: Int {
-            navigateCallArguments.count
-        }
-        func navigatie(to destination: ArticleSearchDestination) {
-            navigateCallArguments.append(destination)
-        }
+        let navigationSubject = PassthroughSubject<ArticleSearchDestination, Never>()
     }
 }

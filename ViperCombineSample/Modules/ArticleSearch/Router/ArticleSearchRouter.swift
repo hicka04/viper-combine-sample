@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 enum ArticleSearchDestination {
     
@@ -13,11 +14,17 @@ enum ArticleSearchDestination {
 
 protocol ArticleSearchWireframe: Wireframe where Destination == ArticleSearchDestination {}
 
-final class ArticleSearchRouter {
-    private unowned let viewController: UIViewController
+final class ArticleSearchRouter: ArticleSearchWireframe {
+    private var cancellables: Set<AnyCancellable> = []
+    let navigationSubject = PassthroughSubject<ArticleSearchDestination, Never>()
     
     private init(viewController: UIViewController) {
-        self.viewController = viewController
+        navigationSubject
+            .sink { [unowned viewController] destination in
+                switch destination {
+                
+                }
+            }.store(in: &cancellables)
     }
     
     static func assembleModules() -> UIViewController {
@@ -30,11 +37,5 @@ final class ArticleSearchRouter {
         view.presenter = presenter
         
         return view
-    }
-}
-
-extension ArticleSearchRouter: ArticleSearchWireframe {
-    func navigatie(to destination: ArticleSearchDestination) {
-        
     }
 }

@@ -164,6 +164,8 @@
 		B82B821E2657E071000EA62C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B88DB0FC2667B93300864021 /* Presentation.swift */,
+				B82B82312657E6F7000EA62C /* Wireframe.swift */,
 				B82B821F2657E07B000EA62C /* ArticleSearch */,
 			);
 			path = Modules;
@@ -249,17 +251,6 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		B82B823A2657EB97000EA62C /* VIPER */ = {
-			isa = PBXGroup;
-			children = (
-				B88DB0FC2667B93300864021 /* Presentation.swift */,
-				B82B82312657E6F7000EA62C /* Wireframe.swift */,
-				B82B82432657F255000EA62C /* Usecase.swift */,
-				B82B82452657F273000EA62C /* UsecaseError.swift */,
-			);
-			path = VIPER;
-			sourceTree = "<group>";
-		};
 		B82B823B2657EEA8000EA62C /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +272,8 @@
 		B82B823F2657EF8A000EA62C /* Usecases */ = {
 			isa = PBXGroup;
 			children = (
+				B82B82432657F255000EA62C /* Usecase.swift */,
+				B82B82452657F273000EA62C /* UsecaseError.swift */,
 				B82B82402657EF99000EA62C /* ArticleSearchInteractor */,
 			);
 			path = Usecases;
@@ -397,7 +390,6 @@
 				B82B823B2657EEA8000EA62C /* Domain */,
 				B82B82492661F5FC000EA62C /* Infra */,
 				B82B822C2657E53D000EA62C /* Resources */,
-				B82B823A2657EB97000EA62C /* VIPER */,
 			);
 			path = ViperCombineSample;
 			sourceTree = "<group>";

@@ -8,32 +8,29 @@
 import Foundation
 import Combine
 
-protocol AppPresentation: AnyObject {
-    func sceneWillConnectToSession()
+enum AppEvent {
+    case sceneWillConnectToSession
 }
 
-final class AppPresenter {
+protocol AppPresentation: AnyObject {
+    var appEventSubject: PassthroughSubject<AppEvent, Never> { get }
+}
+
+final class AppPresenter: AppPresentation {
     private var cancellables: Set<AnyCancellable> = []
-    private let sceneWillConnectToSessionSubject = PassthroughSubject<Void, Never>()
-    private let destinationSubject = PassthroughSubject<AppDestination, Never>()
+    let appEventSubject = PassthroughSubject<AppEvent, Never>()
     
     init<Router: AppWireframe>(
         router: Router
     ) {
-        destinationSubject
-            .sink { destination in
-                router.navigatie(to: destination)
+        appEventSubject
+            .map { appEvent -> AppDestination in
+                switch appEvent {
+                case .sceneWillConnectToSession:
+                    return .artcileSearch
+                }
+            }.sink { destination in
+                router.navigationSubject.send(destination)
             }.store(in: &cancellables)
-        
-        sceneWillConnectToSessionSubject
-            .map { .artcileSearch }
-            .subscribe(destinationSubject)
-            .store(in: &cancellables)
-    }
-}
-
-extension AppPresenter: AppPresentation {
-    func sceneWillConnectToSession() {
-        sceneWillConnectToSessionSubject.send()
     }
 }

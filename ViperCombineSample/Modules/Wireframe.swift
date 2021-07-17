@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 protocol Wireframe: AnyObject {
     associatedtype Destination
     
-    func navigatie(to destination: Destination)
+    var navigationSubject: PassthroughSubject<Destination, Never> { get }
 }

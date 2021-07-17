@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowsScene = (scene as? UIWindowScene) else { return }
         presenter = AppRouter.assembleModules(windowScene: windowsScene)
-        presenter.sceneWillConnectToSession()
+        presenter.appEventSubject.send(.sceneWillConnectToSession)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -16,6 +16,7 @@ class ArticleSearchViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+            tableView.delegate = self
             tableView.dataSource = dataSource
         }
     }
@@ -37,5 +38,19 @@ class ArticleSearchViewController: UIViewController {
             }.store(in: &cancellables)
         
         presenter.viewEventSubject.send(.viewDidLoad)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+}
+
+extension ArticleSearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.viewEventSubject.send(.didSelect(article: presenter.articles[indexPath.row]))
     }
 }

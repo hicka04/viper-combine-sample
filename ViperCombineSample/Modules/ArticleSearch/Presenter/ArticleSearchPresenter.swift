@@ -11,6 +11,7 @@ import CombineSchedulers
 
 enum ArticleSearchViewEvent {
     case viewDidLoad
+    case didSelect(article: ArticleModel)
 }
 
 final class ArticleSearchPresenter: Presentation {
@@ -35,6 +36,9 @@ final class ArticleSearchPresenter: Presentation {
                 switch event {
                 case .viewDidLoad:
                     searchKeywordSubject.send("Swift")
+                    
+                case .didSelect(let article):
+                    router.navigationSubject.send(.articleDetail(article))
                 }
             }.store(in: &cancellables)
         

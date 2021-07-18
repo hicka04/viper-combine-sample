@@ -13,11 +13,15 @@ import CombineSchedulers
 
 final class ArticleSearchPresenterTests: QuickSpec {
     override func spec() {
+        var cancellables: Set<AnyCancellable> = []
         var testScheduler: TestSchedulerOf<DispatchQueue>!
         
         var presenter: ArticleSearchPresenter!
         var router: MockArticleSearchRouter!
         var articleSearchInteractor: MockArticleSearchInteractor!
+        
+        var articlesOutputs: [[ArticleModel]] = []
+        var navigationOutputs: [ArticleSearchDestination] = []
         
         beforeEach {
             testScheduler = DispatchQueue.test
@@ -29,6 +33,15 @@ final class ArticleSearchPresenterTests: QuickSpec {
                 router: router,
                 articleSearchInteractor: articleSearchInteractor
             )
+            
+            presenter.$articles.sink { articlesOutputs.append($0) }.store(in: &cancellables)
+            router.navigationSubject.sink { navigationOutputs.append($0) }.store(in: &cancellables)
+        }
+        
+        afterEach {
+            cancellables = []
+            articlesOutputs = []
+            navigationOutputs = []
         }
         
         describe("viewDidLoad") {
@@ -43,13 +56,36 @@ final class ArticleSearchPresenterTests: QuickSpec {
                     }
                 }.eraseToAnyPublisher()
                 
-                presenter.viewEventSubject.send(.viewDidLoad)
+                testScheduler.schedule {
+                    presenter.viewEventSubject.send(.viewDidLoad)
+                }
+                
+                testScheduler.advance(by: 10)
             }
             
             it("articlesが更新される") {
-                expect(presenter.articles) == []
-                testScheduler.advance(by: 10)
-                expect(presenter.articles) == articles
+                expect(articlesOutputs) == [
+                    [],
+                    articles
+                ]
+            }
+        }
+        
+        describe("didSelectArticle") {
+            let article = ArticleModel(id: .init(rawValue: "article_id"), title: "article_title", body: "article_body")
+            
+            beforeEach {
+                testScheduler.schedule {
+                    presenter.viewEventSubject.send(.didSelect(article: article))
+                }
+                
+                testScheduler.advance()
+            }
+            
+            it("articleDetailViewへ遷移する") {
+                expect(navigationOutputs) == [
+                    .articleDetail(article)
+                ]
             }
         }
     }

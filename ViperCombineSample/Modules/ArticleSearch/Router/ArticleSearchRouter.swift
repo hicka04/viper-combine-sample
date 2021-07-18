@@ -8,8 +8,8 @@
 import UIKit
 import Combine
 
-enum ArticleSearchDestination {
-    
+enum ArticleSearchDestination: Equatable {
+    case articleDetail(_ article: ArticleModel)
 }
 
 protocol ArticleSearchWireframe: Wireframe where Destination == ArticleSearchDestination {}
@@ -22,7 +22,9 @@ final class ArticleSearchRouter: ArticleSearchWireframe {
         navigationSubject
             .sink { [unowned viewController] destination in
                 switch destination {
-                
+                case .articleDetail(let article):
+                    let articleDetailView = ArticleDetailRouter.assembleModules(article: article)
+                    viewController.navigationController?.pushViewController(articleDetailView, animated: true)
                 }
             }.store(in: &cancellables)
     }

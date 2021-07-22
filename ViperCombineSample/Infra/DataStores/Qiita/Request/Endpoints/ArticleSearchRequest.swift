@@ -8,8 +8,8 @@
 import Foundation
 import APIKit
 
-struct ArticleSearchRequest: QiitaRequest {
-    typealias Response = [ArticleEntity]
+struct ArticleSearchRequest: PaginableQiitaRequest {
+    typealias Item = ArticleEntity
     
     let method: HTTPMethod = .get
     let path = "items"
@@ -18,4 +18,6 @@ struct ArticleSearchRequest: QiitaRequest {
     }
     
     let keyword: String
+    var page: Int = 1
+    let pageSize: Int
 }

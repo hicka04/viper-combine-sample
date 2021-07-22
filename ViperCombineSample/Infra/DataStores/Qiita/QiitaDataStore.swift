@@ -26,8 +26,8 @@ final class QiitaDataStore {
 extension QiitaDataStore: QiitaRepository {
     func searchArticles(keyword: String) -> AnyPublisher<[ArticleModel], QiitaRepositoryError> {
         session
-            .sessionTaskPublisher(for: ArticleSearchRequest(keyword: keyword))
-            .map { $0.map { $0.translate() } }
+            .sessionTaskPublisher(for: ArticleSearchRequest(keyword: keyword, page: 1, pageSize: 20))
+            .map { $0.items.map { $0.translate() } }
             .mapError { error in
                 switch error {
                 case .connectionError(let error):

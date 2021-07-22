@@ -26,7 +26,7 @@ extension Request where Response: Decodable {
     }
 }
 
-private struct OriginalDataParser: DataParser {
+struct OriginalDataParser: DataParser {
     var contentType: String? = "application/json"
     
     func parse(data: Data) throws -> Any {

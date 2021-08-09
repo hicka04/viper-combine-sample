@@ -21,6 +21,7 @@ final class ArticleSearchPresenterTests: QuickSpec {
         var articleSearchInteractor: MockArticleSearchInteractor!
         
         var articlesOutputs: [[ArticleModel]] = []
+        var articleSearchErrorOutputs: [ArticleSearchError?] = []
         var navigationOutputs: [ArticleSearchDestination] = []
         
         beforeEach {
@@ -35,39 +36,66 @@ final class ArticleSearchPresenterTests: QuickSpec {
             )
             
             presenter.$articles.sink { articlesOutputs.append($0) }.store(in: &cancellables)
+            presenter.$articleSearchError.sink { articleSearchErrorOutputs.append($0) }.store(in: &cancellables)
             router.navigationSubject.sink { navigationOutputs.append($0) }.store(in: &cancellables)
         }
         
         afterEach {
             cancellables = []
             articlesOutputs = []
+            articleSearchErrorOutputs = []
             navigationOutputs = []
         }
         
         describe("viewDidLoad") {
-            let articles = [
-                ArticleModel(id: .init(rawValue: "article_id"), title: "article_title", body: "article_body")
-            ]
-            
             beforeEach {
-                articleSearchInteractor.executeResult = Future { promise in
-                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
-                        promise(.success(articles))
-                    }
-                }.eraseToAnyPublisher()
-                
                 testScheduler.schedule {
                     presenter.viewEventSubject.send(.viewDidLoad)
                 }
-                
-                testScheduler.advance(by: 10)
             }
             
-            it("articlesが更新される") {
-                expect(articlesOutputs) == [
-                    [],
-                    articles
+            context("articleSearchInteractorの返却値がエラーのとき") {
+                let error = ArticleSearchError(error: NSError(domain: "hoge", code: -1, userInfo: nil))
+                
+                beforeEach {
+                    articleSearchInteractor.executeResult = Future { promise in
+                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                            promise(.failure(error))
+                        }
+                    }.eraseToAnyPublisher()
+                    
+                    testScheduler.advance(by: 10)
+                }
+                
+                it("articleSearchErrorが更新される") {
+                    expect(articleSearchErrorOutputs) == [
+                        nil,
+                        error
+                    ]
+                }
+            }
+            
+            context("articleSearchInteractorの返却値が成功のとき") {
+                let articles = [
+                    ArticleModel(id: .init(rawValue: "article_id"), title: "article_title", body: "article_body")
                 ]
+                
+                beforeEach {
+                    articleSearchInteractor.executeResult = Future { promise in
+                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                            promise(.success(articles))
+                        }
+                    }.eraseToAnyPublisher()
+                    
+                    testScheduler.advance(by: 10)
+                }
+                
+                it("articlesが更新される") {
+                    expect(articlesOutputs) == [
+                        [],
+                        articles
+                    ]
+                }
             }
         }
         

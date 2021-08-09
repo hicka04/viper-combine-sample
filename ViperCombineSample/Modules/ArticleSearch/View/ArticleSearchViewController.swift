@@ -8,18 +8,11 @@
 import UIKit
 import Combine
 
-class ArticleSearchViewController: UIViewController {
+class ArticleSearchViewController: UITableViewController {
     var presenter: ArticleSearchPresenter!
     
     private var cancellables: Set<AnyCancellable> = []
     
-    @IBOutlet private weak var tableView: UITableView! {
-        didSet {
-            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-            tableView.delegate = self
-            tableView.dataSource = dataSource
-        }
-    }
     private lazy var dataSource = UITableViewDiffableDataSource<Int, ArticleModel>(tableView: tableView) { tableView, indexPath, article -> UITableViewCell? in
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = article.title
@@ -28,6 +21,10 @@ class ArticleSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.dataSource = dataSource
+        clearsSelectionOnViewWillAppear = true
         
         presenter.$articles
             .sink { [weak self] articles in
@@ -40,17 +37,7 @@ class ArticleSearchViewController: UIViewController {
         presenter.viewEventSubject.send(.viewDidLoad)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
-    }
-}
-
-extension ArticleSearchViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.viewEventSubject.send(.didSelect(article: presenter.articles[indexPath.row]))
     }
 }

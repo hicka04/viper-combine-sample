@@ -12,11 +12,14 @@ import CombineSchedulers
 enum ArticleSearchViewEvent {
     case viewDidLoad
     case didSelect(article: ArticleModel)
+    case willReachLatestCell
 }
 
 final class ArticleSearchPresenter: Presentation {
     private var cancellables: Set<AnyCancellable> = []
     let viewEventSubject = PassthroughSubject<ArticleSearchViewEvent, Never>()
+    
+    private var articleSearchSubscription: Subscription?
     
     @Published var articles: [ArticleModel] = []
     @Published var articleSearchError: ArticleSearchError?
@@ -37,25 +40,47 @@ final class ArticleSearchPresenter: Presentation {
                 case .viewDidLoad:
                     searchKeywordSubject.send("Swift")
                     
+                case .willReachLatestCell:
+                    self.subscription?.request(.max(1))
+                    
                 case .didSelect(let article):
                     router.navigationSubject.send(.articleDetail(article))
                 }
             }.store(in: &cancellables)
         
         searchKeywordSubject
+            .setFailureType(to: ArticleSearchError.self)
             .flatMap { searchKeyword in
                 articleSearchInteractor
                     .execute(searchKeyword)
-                    .convertToResultPublisher()
             }.receive(on: mainScheduler)
-            .sink { [weak self] result in
-                switch result {
-                case .success(let articles):
-                    self?.articles = articles
-                    
-                case .failure(let error):
-                    self?.articleSearchError = error
-                }
-            }.store(in: &cancellables)
+            .subscribe(self)
+    }
+}
+
+extension ArticleSearchPresenter: Subscriber {
+    typealias Input = [ArticleModel]
+    typealias Failure = ArticleSearchInteractor.Failure
+    
+    func receive(subscription: Subscription) {
+        self.articleSearchSubscription = subscription
+        subscription.request(.max(1))
+    }
+    
+    func receive(_ input: [ArticleModel]) -> Subscribers.Demand {
+        self.articles += input
+        
+        return .max(1)
+    }
+    
+    func receive(completion: Subscribers.Completion<ArticleSearchInteractor.Failure>) {
+        switch completion {
+        case .failure(let error):
+            self.articleSearchError = error
+        
+        case .finished:
+            articleSearchSubscription?.cancel()
+            articleSearchSubscription = nil
+        }
     }
 }

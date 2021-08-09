@@ -46,6 +46,8 @@
 		B8E9ECBC26A462A100D68BAA /* ArticleDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E9ECBB26A462A100D68BAA /* ArticleDetailPresenter.swift */; };
 		B8E9ECBF26A462B400D68BAA /* ArticleDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E9ECBE26A462B400D68BAA /* ArticleDetailRouter.swift */; };
 		B8E9ECC126A8BF1A00D68BAA /* PageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E9ECC026A8BF1A00D68BAA /* PageResponse.swift */; };
+		B8E9ECC326A95EA300D68BAA /* PaginationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E9ECC226A95EA300D68BAA /* PaginationPublisher.swift */; };
+		B8E9ECC626A9AD9700D68BAA /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B8E9ECC526A9AD9700D68BAA /* CombineCocoa */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,7 @@
 		B8E9ECBB26A462A100D68BAA /* ArticleDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailPresenter.swift; sourceTree = "<group>"; };
 		B8E9ECBE26A462B400D68BAA /* ArticleDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailRouter.swift; sourceTree = "<group>"; };
 		B8E9ECC026A8BF1A00D68BAA /* PageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageResponse.swift; sourceTree = "<group>"; };
+		B8E9ECC226A95EA300D68BAA /* PaginationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationPublisher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B87B5F222692892400CBB587 /* CombineSchedulers in Frameworks */,
+				B8E9ECC626A9AD9700D68BAA /* CombineCocoa in Frameworks */,
 				B82B82532661F72C000EA62C /* APIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				B82B824F2661F6B3000EA62C /* QiitaDataStore.swift */,
+				B8E9ECC226A95EA300D68BAA /* PaginationPublisher.swift */,
 				B82B82542661F7F1000EA62C /* Request */,
 				B82B825E2661FBC2000EA62C /* Entities */,
 			);
@@ -561,6 +566,7 @@
 			packageProductDependencies = (
 				B82B82522661F72C000EA62C /* APIKit */,
 				B87B5F212692892400CBB587 /* CombineSchedulers */,
+				B8E9ECC526A9AD9700D68BAA /* CombineCocoa */,
 			);
 			productName = ViperCombineSample;
 			productReference = B87414CC2657DFBC0061A031 /* ViperCombineSample.app */;
@@ -622,6 +628,7 @@
 				B82B826426628FBA000EA62C /* XCRemoteSwiftPackageReference "Quick" */,
 				B82B826726628FD6000EA62C /* XCRemoteSwiftPackageReference "Nimble" */,
 				B87B5F202692892400CBB587 /* XCRemoteSwiftPackageReference "combine-schedulers" */,
+				B8E9ECC426A9AD9700D68BAA /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 			);
 			productRefGroup = B87414CD2657DFBC0061A031 /* Products */;
 			projectDirPath = "";
@@ -673,6 +680,7 @@
 				B82B82322657E6F7000EA62C /* Wireframe.swift in Sources */,
 				B82B822E2657E671000EA62C /* ArticleSearchPresenter.swift in Sources */,
 				B82B82592661F87D000EA62C /* ArticleSearchRequest.swift in Sources */,
+				B8E9ECC326A95EA300D68BAA /* PaginationPublisher.swift in Sources */,
 				B82B82392657EB55000EA62C /* AppRouter.swift in Sources */,
 				B87414D22657DFBC0061A031 /* SceneDelegate.swift in Sources */,
 				B88DB0FD2667B93300864021 /* Presentation.swift in Sources */,
@@ -990,6 +998,14 @@
 				minimumVersion = 0.5.0;
 			};
 		};
+		B8E9ECC426A9AD9700D68BAA /* XCRemoteSwiftPackageReference "CombineCocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineCocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1017,6 +1033,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B87B5F202692892400CBB587 /* XCRemoteSwiftPackageReference "combine-schedulers" */;
 			productName = CombineSchedulers;
+		};
+		B8E9ECC526A9AD9700D68BAA /* CombineCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B8E9ECC426A9AD9700D68BAA /* XCRemoteSwiftPackageReference "CombineCocoa" */;
+			productName = CombineCocoa;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

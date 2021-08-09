@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import CombineCocoa
 
 class ArticleSearchViewController: UIViewController {
     var presenter: ArticleSearchPresenter!
@@ -28,6 +29,20 @@ class ArticleSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let latestVisibleCellIndexPublisher = tableView.contentOffsetPublisher
+            .compactMap { _ in self.tableView.indexPathsForVisibleRows?.max()?.row }
+        let articlesCountPublisher = presenter.$articles.map { $0.count }
+            
+        Publishers.CombineLatest(latestVisibleCellIndexPublisher, articlesCountPublisher)
+            .filter { (cellIndex: Int, articlesCount: Int) in
+                articlesCount > 0 && cellIndex == articlesCount - 1
+            }.removeDuplicates { previous, current in
+                previous.1 == current.1
+            }.print()
+            .map { _ in .willReachLatestCell }
+            .subscribe(presenter.viewEventSubject)
+            .store(in: &cancellables)
         
         presenter.$articles
             .sink { [weak self] articles in

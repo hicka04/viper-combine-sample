@@ -99,6 +99,58 @@ final class ArticleSearchPresenterTests: QuickSpec {
             }
         }
         
+        describe("refreshControlValueChanged") {
+            beforeEach {
+                testScheduler.schedule {
+                    presenter.viewEventSubject.send(.refreshControlValueChanged)
+                }
+            }
+            
+            context("articleSearchInteractorの返却値がエラーのとき") {
+                let error = ArticleSearchError(error: NSError(domain: "hoge", code: -1, userInfo: nil))
+                
+                beforeEach {
+                    articleSearchInteractor.executeResult = Future { promise in
+                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                            promise(.failure(error))
+                        }
+                    }.eraseToAnyPublisher()
+                    
+                    testScheduler.advance(by: 10)
+                }
+                
+                it("articleSearchErrorが更新される") {
+                    expect(articleSearchErrorOutputs) == [
+                        nil,
+                        error
+                    ]
+                }
+            }
+            
+            context("articleSearchInteractorの返却値が成功のとき") {
+                let articles = [
+                    ArticleModel(id: .init(rawValue: "article_id"), title: "article_title", body: "article_body")
+                ]
+                
+                beforeEach {
+                    articleSearchInteractor.executeResult = Future { promise in
+                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                            promise(.success(articles))
+                        }
+                    }.eraseToAnyPublisher()
+                    
+                    testScheduler.advance(by: 10)
+                }
+                
+                it("articlesが更新される") {
+                    expect(articlesOutputs) == [
+                        [],
+                        articles
+                    ]
+                }
+            }
+        }
+        
         describe("didSelectArticle") {
             let article = ArticleModel(id: .init(rawValue: "article_id"), title: "article_title", body: "article_body")
             

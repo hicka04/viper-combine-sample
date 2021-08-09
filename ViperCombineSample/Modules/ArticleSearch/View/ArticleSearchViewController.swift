@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import CombineCocoa
 
 class ArticleSearchViewController: UITableViewController {
     var presenter: ArticleSearchPresenter!
@@ -24,6 +25,14 @@ class ArticleSearchViewController: UITableViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = dataSource
+        tableView.refreshControl = {
+            let refreshControl = UIRefreshControl()
+            refreshControl.controlEventPublisher(for: .valueChanged)
+                .map { _ in .refreshControlValueChanged }
+                .subscribe(presenter.viewEventSubject)
+                .store(in: &cancellables)
+            return refreshControl
+        }()
         clearsSelectionOnViewWillAppear = true
         
         presenter.$articles
@@ -31,7 +40,9 @@ class ArticleSearchViewController: UITableViewController {
                 var snapshot = NSDiffableDataSourceSnapshot<Int, ArticleModel>()
                 snapshot.appendSections([0])
                 snapshot.appendItems(articles, toSection: 0)
-                self?.dataSource.apply(snapshot, animatingDifferences: true)
+                self?.dataSource.apply(snapshot, animatingDifferences: true) {
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
             }.store(in: &cancellables)
         
         presenter.$articleSearchError
@@ -39,7 +50,9 @@ class ArticleSearchViewController: UITableViewController {
             .sink { [weak self] error in
                 let alert = UIAlertController(title: "記事の取得に失敗しました", message: "時間をおいて再度お試しください", preferredStyle: .alert)
                 alert.addAction(.init(title: "OK", style: .default, handler: nil))
-                self?.present(alert, animated: true, completion: nil)
+                self?.present(alert, animated: true) {
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
             }.store(in: &cancellables)
         
         presenter.viewEventSubject.send(.viewDidLoad)

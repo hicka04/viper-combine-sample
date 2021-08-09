@@ -11,6 +11,7 @@ import CombineSchedulers
 
 enum ArticleSearchViewEvent {
     case viewDidLoad
+    case refreshControlValueChanged
     case didSelect(article: ArticleModel)
 }
 
@@ -34,7 +35,7 @@ final class ArticleSearchPresenter: Presentation {
         viewEventSubject
             .sink { event in
                 switch event {
-                case .viewDidLoad:
+                case .viewDidLoad, .refreshControlValueChanged:
                     searchKeywordSubject.send("Swift")
                     
                 case .didSelect(let article):

@@ -11,6 +11,6 @@ class ArticleBodyCell: UICollectionViewCell {
     @IBOutlet private weak var bodyLabel: UILabel!
     
     func setBody(_ body: String) {
-        bodyLabel.text = body
+        bodyLabel.attributedText = try? NSAttributedString(markdown: body, baseURL: URL(string: "https://qiita.com"))
     }
 }

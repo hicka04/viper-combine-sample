@@ -8,7 +8,6 @@
 @testable import ViperCombineSample
 import Quick
 import Nimble
-import EntwineTest
 import OHHTTPStubs
 import OHHTTPStubsSwift
 import Combine

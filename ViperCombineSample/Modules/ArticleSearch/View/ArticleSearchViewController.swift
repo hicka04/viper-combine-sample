@@ -9,23 +9,53 @@ import UIKit
 import Combine
 import CombineCocoa
 
-class ArticleSearchViewController: UITableViewController {
+class ArticleSearchViewController: UICollectionViewController {
     var presenter: ArticleSearchPresenter!
     
     private var cancellables: Set<AnyCancellable> = []
     
-    private lazy var dataSource = UITableViewDiffableDataSource<Int, ArticleModel>(tableView: tableView) { tableView, indexPath, article -> UITableViewCell? in
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = article.title
+    private lazy var dataSource = UICollectionViewDiffableDataSource<Int, ArticleModel>(collectionView: collectionView) { collectionView, indexPath, article -> UICollectionViewCell? in
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ArticleCell
+        cell.set(article: article)
         return cell
+    }
+    
+    init() {
+        super.init(
+            collectionViewLayout: UICollectionViewCompositionalLayout { section, environment in
+                let item = NSCollectionLayoutItem(
+                    layoutSize: .init(
+                        widthDimension: .fractionalWidth(1.0),
+                        heightDimension: .absolute(44)
+                    )
+                )
+                let group = NSCollectionLayoutGroup.vertical(
+                    layoutSize: .init(
+                        widthDimension: .fractionalWidth(1.0),
+                        heightDimension: .absolute(44)
+                    ),
+                    subitems: [item]
+                )
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
+                
+                return section
+            }
+        )
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.dataSource = dataSource
-        tableView.refreshControl = {
+        collectionView.backgroundColor = .systemBackground
+        
+        collectionView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        collectionView.dataSource = dataSource
+        collectionView.refreshControl = {
             let refreshControl = UIRefreshControl()
             refreshControl.controlEventPublisher(for: .valueChanged)
                 .map { _ in .refreshControlValueChanged }
@@ -41,7 +71,7 @@ class ArticleSearchViewController: UITableViewController {
                 snapshot.appendSections([0])
                 snapshot.appendItems(articles, toSection: 0)
                 self?.dataSource.apply(snapshot, animatingDifferences: true) {
-                    self?.tableView.refreshControl?.endRefreshing()
+                    self?.collectionView.refreshControl?.endRefreshing()
                 }
             }.store(in: &cancellables)
         
@@ -51,14 +81,14 @@ class ArticleSearchViewController: UITableViewController {
                 let alert = UIAlertController(title: "記事の取得に失敗しました", message: "時間をおいて再度お試しください", preferredStyle: .alert)
                 alert.addAction(.init(title: "OK", style: .default, handler: nil))
                 self?.present(alert, animated: true) {
-                    self?.tableView.refreshControl?.endRefreshing()
+                    self?.collectionView.refreshControl?.endRefreshing()
                 }
             }.store(in: &cancellables)
         
         presenter.viewEventSubject.send(.viewDidLoad)
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter.viewEventSubject.send(.didSelect(article: presenter.articles[indexPath.row]))
     }
 }

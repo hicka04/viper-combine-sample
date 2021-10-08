@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import CombineSchedulers
+import OrderedCollections
 
 enum ArticleSearchViewEvent {
     case viewDidLoad
@@ -19,7 +20,7 @@ final class ArticleSearchPresenter: Presentation {
     private var cancellables: Set<AnyCancellable> = []
     let viewEventSubject = PassthroughSubject<ArticleSearchViewEvent, Never>()
     
-    @Published var articles: [ArticleModel] = []
+    @Published var articles: OrderedSet<ArticleModel> = []
     @Published var articleSearchError: ArticleSearchError?
     
     init<
@@ -52,7 +53,7 @@ final class ArticleSearchPresenter: Presentation {
             .sink { [weak self] result in
                 switch result {
                 case .success(let articles):
-                    self?.articles = articles
+                    self?.articles.elements = articles
                     
                 case .failure(let error):
                     self?.articleSearchError = error

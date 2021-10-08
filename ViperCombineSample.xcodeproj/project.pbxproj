@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B81436D8266BC1F00086C14A /* ArticleSearchPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81436D7266BC1F00086C14A /* ArticleSearchPresenterTests.swift */; };
 		B81436E1266BC48E0086C14A /* MockArticleSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81436E0266BC48E0086C14A /* MockArticleSearchInteractor.swift */; };
+		B82A050E271083330090C300 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = B82A050D271083330090C300 /* Collections */; };
 		B82B82292657E51B000EA62C /* ArticleSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B82272657E51B000EA62C /* ArticleSearchViewController.swift */; };
 		B82B822E2657E671000EA62C /* ArticleSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B822D2657E671000EA62C /* ArticleSearchPresenter.swift */; };
 		B82B82302657E6AE000EA62C /* ArticleSearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B822F2657E6AE000EA62C /* ArticleSearchRouter.swift */; };
@@ -113,6 +114,7 @@
 			files = (
 				B87B5F222692892400CBB587 /* CombineSchedulers in Frameworks */,
 				B8C7477526C162A100895BDF /* CombineCocoa in Frameworks */,
+				B82A050E271083330090C300 /* Collections in Frameworks */,
 				B82B82532661F72C000EA62C /* APIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -589,6 +591,7 @@
 				B82B82522661F72C000EA62C /* APIKit */,
 				B87B5F212692892400CBB587 /* CombineSchedulers */,
 				B8C7477426C162A100895BDF /* CombineCocoa */,
+				B82A050D271083330090C300 /* Collections */,
 			);
 			productName = ViperCombineSample;
 			productReference = B87414CC2657DFBC0061A031 /* ViperCombineSample.app */;
@@ -651,6 +654,7 @@
 				B82B826726628FD6000EA62C /* XCRemoteSwiftPackageReference "Nimble" */,
 				B87B5F202692892400CBB587 /* XCRemoteSwiftPackageReference "combine-schedulers" */,
 				B8C7477326C162A100895BDF /* XCRemoteSwiftPackageReference "CombineCocoa" */,
+				B82A050C271083330090C300 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = B87414CD2657DFBC0061A031 /* Products */;
 			projectDirPath = "";
@@ -982,6 +986,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B82A050C271083330090C300 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 		B82B82512661F72C000EA62C /* XCRemoteSwiftPackageReference "APIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ishkawa/APIKit.git";
@@ -1033,6 +1045,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B82A050D271083330090C300 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B82A050C271083330090C300 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
 		B82B82522661F72C000EA62C /* APIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B82B82512661F72C000EA62C /* XCRemoteSwiftPackageReference "APIKit" */;

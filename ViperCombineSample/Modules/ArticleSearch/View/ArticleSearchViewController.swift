@@ -51,6 +51,9 @@ class ArticleSearchViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Articles"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
         collectionView.backgroundColor = .systemBackground
         
         collectionView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellWithReuseIdentifier: "Cell")

@@ -10,6 +10,7 @@ import Quick
 import Nimble
 import Combine
 import CombineSchedulers
+import OrderedCollections
 
 final class ArticleSearchPresenterTests: QuickSpec {
     override func spec() {
@@ -20,7 +21,7 @@ final class ArticleSearchPresenterTests: QuickSpec {
         var router: MockArticleSearchRouter!
         var articleSearchInteractor: MockArticleSearchInteractor!
         
-        var articlesOutputs: [[ArticleModel]] = []
+        var articlesOutputs: [OrderedSet<ArticleModel>] = []
         var articleSearchErrorOutputs: [ArticleSearchError?] = []
         var navigationOutputs: [ArticleSearchDestination] = []
         
@@ -30,7 +31,7 @@ final class ArticleSearchPresenterTests: QuickSpec {
             router = .init()
             articleSearchInteractor = .init()
             presenter = .init(
-                mainScheduler: .immediate,
+                mainScheduler: testScheduler.eraseToAnyScheduler(),
                 router: router,
                 articleSearchInteractor: articleSearchInteractor
             )
@@ -93,7 +94,7 @@ final class ArticleSearchPresenterTests: QuickSpec {
                 it("articlesが更新される") {
                     expect(articlesOutputs) == [
                         [],
-                        articles
+                        .init(articles)
                     ]
                 }
             }
@@ -145,7 +146,7 @@ final class ArticleSearchPresenterTests: QuickSpec {
                 it("articlesが更新される") {
                     expect(articlesOutputs) == [
                         [],
-                        articles
+                        .init(articles)
                     ]
                 }
             }

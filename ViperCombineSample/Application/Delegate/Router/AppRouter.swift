@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 enum AppDestination {
-    case artcileSearch
+    case main
 }
 
 protocol AppWireframe: AnyObject {
@@ -24,8 +24,8 @@ final class AppRouter: AppWireframe {
         navigationSubject
             .sink { destination in
                 switch destination {
-                case .artcileSearch:
-                    window.rootViewController = UINavigationController(rootViewController: ArticleSearchRouter.assembleModules())
+                case .main:
+                    window.rootViewController = MainRouter.assembleModules()
                     window.makeKeyAndVisible()
                 }
             }.store(in: &cancellables)

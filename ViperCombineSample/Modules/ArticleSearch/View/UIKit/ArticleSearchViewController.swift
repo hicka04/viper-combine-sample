@@ -10,7 +10,7 @@ import Combine
 import CombineCocoa
 
 class ArticleSearchViewController: UICollectionViewController {
-    var presenter: ArticleSearchPresenter!
+    private let presenter: ArticleSearchPresenter
     
     private var cancellables: Set<AnyCancellable> = []
     
@@ -20,7 +20,8 @@ class ArticleSearchViewController: UICollectionViewController {
         return cell
     }
     
-    init() {
+    init(presenter: ArticleSearchPresenter) {
+        self.presenter = presenter
         super.init(
             collectionViewLayout: UICollectionViewCompositionalLayout { section, environment in
                 let item = NSCollectionLayoutItem(

@@ -27,7 +27,7 @@ final class AppPresenter: AppPresentation {
             .map { appEvent -> AppDestination in
                 switch appEvent {
                 case .sceneWillConnectToSession:
-                    return .artcileSearch
+                    return .main
                 }
             }.sink { destination in
                 router.navigationSubject.send(destination)

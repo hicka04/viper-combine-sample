@@ -10,6 +10,10 @@
 		B81436D8266BC1F00086C14A /* ArticleSearchPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81436D7266BC1F00086C14A /* ArticleSearchPresenterTests.swift */; };
 		B81436E1266BC48E0086C14A /* MockArticleSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81436E0266BC48E0086C14A /* MockArticleSearchInteractor.swift */; };
 		B82A050E271083330090C300 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = B82A050D271083330090C300 /* Collections */; };
+		B82A051227111A270090C300 /* ArticleSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A051127111A270090C300 /* ArticleSearchView.swift */; };
+		B82A05182711603C0090C300 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A05172711603C0090C300 /* MainViewController.swift */; };
+		B82A051A2711607B0090C300 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A05192711607B0090C300 /* MainRouter.swift */; };
+		B82A051C271161890090C300 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A051B271161890090C300 /* MainPresenter.swift */; };
 		B82B82292657E51B000EA62C /* ArticleSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B82272657E51B000EA62C /* ArticleSearchViewController.swift */; };
 		B82B822E2657E671000EA62C /* ArticleSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B822D2657E671000EA62C /* ArticleSearchPresenter.swift */; };
 		B82B82302657E6AE000EA62C /* ArticleSearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B822F2657E6AE000EA62C /* ArticleSearchRouter.swift */; };
@@ -66,6 +70,10 @@
 /* Begin PBXFileReference section */
 		B81436D7266BC1F00086C14A /* ArticleSearchPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchPresenterTests.swift; sourceTree = "<group>"; };
 		B81436E0266BC48E0086C14A /* MockArticleSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockArticleSearchInteractor.swift; sourceTree = "<group>"; };
+		B82A051127111A270090C300 /* ArticleSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchView.swift; sourceTree = "<group>"; };
+		B82A05172711603C0090C300 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B82A05192711607B0090C300 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		B82A051B271161890090C300 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		B82B82272657E51B000EA62C /* ArticleSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchViewController.swift; sourceTree = "<group>"; };
 		B82B822D2657E671000EA62C /* ArticleSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchPresenter.swift; sourceTree = "<group>"; };
 		B82B822F2657E6AE000EA62C /* ArticleSearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSearchRouter.swift; sourceTree = "<group>"; };
@@ -181,11 +189,63 @@
 			path = ArticleSearch;
 			sourceTree = "<group>";
 		};
+		B82A050F271119E80090C300 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				B82B82272657E51B000EA62C /* ArticleSearchViewController.swift */,
+				B8E77B9A26ECED9000210A40 /* SubViews */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		B82A0510271119F90090C300 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				B82A051127111A270090C300 /* ArticleSearchView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		B82A051327115FDD0090C300 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B82A0516271160180090C300 /* View */,
+				B82A051527115FF40090C300 /* Presenter */,
+				B82A051427115FEF0090C300 /* Router */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		B82A051427115FEF0090C300 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B82A05192711607B0090C300 /* MainRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		B82A051527115FF40090C300 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B82A051B271161890090C300 /* MainPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B82A0516271160180090C300 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B82A05172711603C0090C300 /* MainViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B82B821E2657E071000EA62C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
 				B88DB0FC2667B93300864021 /* Presentation.swift */,
 				B82B82312657E6F7000EA62C /* Wireframe.swift */,
+				B82A051327115FDD0090C300 /* Main */,
 				B82B821F2657E07B000EA62C /* ArticleSearch */,
 				B8E9ECB226A4624200D68BAA /* ArticleDetail */,
 			);
@@ -205,8 +265,8 @@
 		B82B82202657E08D000EA62C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B82B82272657E51B000EA62C /* ArticleSearchViewController.swift */,
-				B8E77B9A26ECED9000210A40 /* SubViews */,
+				B82A0510271119F90090C300 /* SwiftUI */,
+				B82A050F271119E80090C300 /* UIKit */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -694,8 +754,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B82B82502661F6B3000EA62C /* QiitaDataStore.swift in Sources */,
+				B82A051A2711607B0090C300 /* MainRouter.swift in Sources */,
 				B82B82602661FBD7000EA62C /* ArticleEntity.swift in Sources */,
 				B8E9ECBF26A462B400D68BAA /* ArticleDetailRouter.swift in Sources */,
+				B82A051227111A270090C300 /* ArticleSearchView.swift in Sources */,
 				B87414D02657DFBC0061A031 /* AppDelegate.swift in Sources */,
 				B82B82422657EFB6000EA62C /* ArticleSearchInteractor.swift in Sources */,
 				B82B825D2661F9BB000EA62C /* APIKit+extension.swift in Sources */,
@@ -710,11 +772,13 @@
 				B82B82392657EB55000EA62C /* AppRouter.swift in Sources */,
 				B87414D22657DFBC0061A031 /* SceneDelegate.swift in Sources */,
 				B8D85EEF26C0F5DC00EFAABA /* ArticleTitleCell.swift in Sources */,
+				B82A05182711603C0090C300 /* MainViewController.swift in Sources */,
 				B88DB0FD2667B93300864021 /* Presentation.swift in Sources */,
 				B82B82462657F273000EA62C /* UsecaseError.swift in Sources */,
 				B87B5F1F2692872C00CBB587 /* Combine.Publisher+extension.swift in Sources */,
 				B8E77B9D26ECEDAD00210A40 /* ArticleCell.swift in Sources */,
 				B82B82442657F255000EA62C /* Usecase.swift in Sources */,
+				B82A051C271161890090C300 /* MainPresenter.swift in Sources */,
 				B8E9ECB826A4627E00D68BAA /* ArticleDetailViewController.swift in Sources */,
 				B82B82292657E51B000EA62C /* ArticleSearchViewController.swift in Sources */,
 				B82B824E2661F64A000EA62C /* QiitaRepository.swift in Sources */,

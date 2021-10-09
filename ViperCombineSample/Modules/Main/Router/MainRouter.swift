@@ -30,6 +30,7 @@ final class MainRouter: MainWireframe {
             
             let swiftUIView = UINavigationController(rootViewController: ArticleSearchRouter.assembleModulesSwiftUI())
             swiftUIView.tabBarItem = .init(title: "SwiftUI", image: .init(systemName: "magnifyingglass"), selectedImage: nil)
+            swiftUIView.navigationBar.prefersLargeTitles = true
             
             let view = MainViewController()
             view.viewControllers = [

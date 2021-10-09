@@ -59,6 +59,8 @@ class ArticleDetailViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.largeTitleDisplayMode = .never
+        
         collectionView.backgroundColor = .systemBackground
         
         collectionView.register(UINib(nibName: "ArticleTitleCell", bundle: nil), forCellWithReuseIdentifier: "ArticleTitleCell")

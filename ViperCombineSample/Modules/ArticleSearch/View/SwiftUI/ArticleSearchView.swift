@@ -16,7 +16,8 @@ struct ArticleSearchView: View {
             onTapArticle: { article in
                 presenter.viewEventSubject.send(.didSelect(article: article))
             }
-        ).onAppear {
+        ).navigationBarTitle(Text("Articles"), displayMode: .large)
+        .onAppear {
             presenter.viewEventSubject.send(.viewDidLoad)
         }
     }

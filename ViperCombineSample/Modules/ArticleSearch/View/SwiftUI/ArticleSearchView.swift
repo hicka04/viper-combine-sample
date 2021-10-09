@@ -11,20 +11,32 @@ struct ArticleSearchView: View {
     @ObservedObject var presenter: ArticleSearchPresenter
     
     var body: some View {
-        ArticleListView(articles: presenter.articles.elements)
-            .onAppear {
-                presenter.viewEventSubject.send(.viewDidLoad)
+        ArticleListView(
+            articles: presenter.articles.elements,
+            onTapArticle: { article in
+                presenter.viewEventSubject.send(.didSelect(article: article))
             }
+        ).onAppear {
+            presenter.viewEventSubject.send(.viewDidLoad)
+        }
     }
 }
 
 extension ArticleSearchView {
     struct ArticleListView: View {
-        var articles: [ArticleModel]
+        let articles: [ArticleModel]
+        let onTapArticle: (ArticleModel) -> Void
         
         var body: some View {
             List(articles) { article in
-                Text(article.title)
+                HStack {
+                    Text(article.title)
+                    Spacer()
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    onTapArticle(article)
+                }
             }.listStyle(.plain)
         }
     }
@@ -44,7 +56,8 @@ struct ArticleListView_Previews: PreviewProvider {
                     title: "長いタイトル長いタイトル長いタイトル長いタイトル長いタイトル長いタイトル長いタイトル長いタイトル長いタイトル長いタイトル",
                     body: "ふが"
                 )
-            ]
+            ],
+            onTapArticle: { _ in }
         )
     }
 }

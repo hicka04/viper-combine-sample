@@ -41,9 +41,9 @@ final class AppPresenterTests: QuickSpec {
                 testScheduler.advance()
             }
             
-            it("destination is articleSearch") {
+            it("destination is main") {
                 expect(navigationOutputs) == [
-                    .artcileSearch
+                    .main
                 ]
             }
         }

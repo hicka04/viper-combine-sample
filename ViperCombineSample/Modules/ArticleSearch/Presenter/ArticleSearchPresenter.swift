@@ -19,7 +19,7 @@ final class ArticleSearchPresenter: Presentation {
     private var cancellables: Set<AnyCancellable> = []
     let viewEventSubject = PassthroughSubject<ArticleSearchViewEvent, Never>()
     
-    @Published var articles: [ArticleModel] = []
+    @Published private(set) var articles: [ArticleModel] = []
     @Published var articleSearchError: ArticleSearchError?
     
     init<

@@ -16,7 +16,14 @@ struct ArticleSearchView: View {
             onTapArticle: { article in
                 presenter.viewEventSubject.send(.didSelect(article: article))
             }
-        ).navigationBarTitle(Text("Articles"), displayMode: .large)
+        )
+        .alert(item: $presenter.articleSearchError) { error in
+            Alert(
+                title: .init("記事の取得に失敗しました"),
+                message: .init("時間をおいて再度お試しください"),
+                dismissButton: nil
+            )
+        }.navigationBarTitle(Text("Articles"), displayMode: .large)
         .onAppear {
             presenter.viewEventSubject.send(.viewDidLoad)
         }

@@ -8,7 +8,11 @@
 import Foundation
 import Combine
 
-struct ArticleSearchError: UsecaseError {
+struct ArticleSearchError: UsecaseError, Identifiable {
+    var id: String {
+        message
+    }
+    
     let message: String
     
     init(error: Error) {

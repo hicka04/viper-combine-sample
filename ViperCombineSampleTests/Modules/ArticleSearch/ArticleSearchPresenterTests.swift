@@ -21,7 +21,7 @@ final class ArticleSearchPresenterTests: QuickSpec {
         var router: MockArticleSearchRouter!
         var articleSearchInteractor: MockArticleSearchInteractor!
         
-        var articlesOutputs: [OrderedSet<ArticleModel>] = []
+        var articlesOutputs: [[ArticleModel]] = []
         var articleSearchErrorOutputs: [ArticleSearchError?] = []
         var navigationOutputs: [ArticleSearchDestination] = []
         

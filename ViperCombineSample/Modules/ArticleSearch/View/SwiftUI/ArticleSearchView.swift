@@ -12,7 +12,7 @@ struct ArticleSearchView: View {
     
     var body: some View {
         ArticleListView(
-            articles: presenter.articles.elements,
+            articles: presenter.articles,
             onTapArticle: { article in
                 presenter.viewEventSubject.send(.didSelect(article: article))
             }

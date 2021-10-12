@@ -73,7 +73,7 @@ class ArticleSearchViewController: UICollectionViewController {
             .sink { [weak self] articles in
                 var snapshot = NSDiffableDataSourceSnapshot<Int, ArticleModel>()
                 snapshot.appendSections([0])
-                snapshot.appendItems(articles.elements, toSection: 0)
+                snapshot.appendItems(articles, toSection: 0)
                 self?.dataSource.apply(snapshot, animatingDifferences: true) {
                     self?.collectionView.refreshControl?.endRefreshing()
                 }

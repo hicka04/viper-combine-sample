@@ -82,7 +82,11 @@ class ArticleSearchViewController: UICollectionViewController {
         presenter.$articleSearchError
             .compactMap { $0 }
             .sink { [weak self] error in
-                let alert = UIAlertController(title: "記事の取得に失敗しました", message: "時間をおいて再度お試しください", preferredStyle: .alert)
+                let alert = UIAlertController(
+                    title: error.errorDescription,
+                    message: error.recoverySuggestion,
+                    preferredStyle: .alert
+                )
                 alert.addAction(.init(title: "OK", style: .default, handler: nil))
                 self?.present(alert, animated: true) {
                     self?.collectionView.refreshControl?.endRefreshing()

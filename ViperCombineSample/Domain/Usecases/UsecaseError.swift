@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol UsecaseError: Error, Equatable {
-    var message: String { get }
-}
+protocol UsecaseError: LocalizedError, Equatable {}
 
-extension Never: UsecaseError {
-    var message: String {
-        fatalError()
-    }
-}
+extension Never: UsecaseError {}

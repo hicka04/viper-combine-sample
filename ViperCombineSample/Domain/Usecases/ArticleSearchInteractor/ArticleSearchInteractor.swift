@@ -9,14 +9,36 @@ import Foundation
 import Combine
 
 struct ArticleSearchError: UsecaseError, Identifiable {
-    var id: String {
-        message
+    private let error: QiitaRepositoryError
+    
+    var errorDescription: String {
+        switch error {
+        case .connectionError:
+            return "ネットワークエラーが発生しました"
+        case .requestError:
+            return "予期せぬエラーが発生しました"
+        case .responseError:
+            return "検索に失敗しました"
+        }
     }
     
-    let message: String
+    var recoverySuggestion: String? {
+        switch error {
+        case .connectionError:
+            return "通信環境を確認して再度お試しください"
+        case .requestError:
+            return nil
+        case .responseError:
+            return "時間をおいて再度お試しください"
+        }
+    }
     
-    init(error: Error) {
-        message = "\(error)"
+    var id: String {
+        error.localizedDescription
+    }
+    
+    init(error: QiitaRepositoryError) {
+        self.error = error
     }
 }
 

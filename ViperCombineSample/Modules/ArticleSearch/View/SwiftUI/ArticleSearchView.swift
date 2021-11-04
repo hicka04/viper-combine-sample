@@ -19,8 +19,8 @@ struct ArticleSearchView: View {
         )
         .alert(item: $presenter.articleSearchError) { error in
             Alert(
-                title: .init("記事の取得に失敗しました"),
-                message: .init("時間をおいて再度お試しください"),
+                title: .init(error.errorDescription),
+                message: error.recoverySuggestion.map { .init($0) },
                 dismissButton: nil
             )
         }.navigationBarTitle(Text("Articles"), displayMode: .large)

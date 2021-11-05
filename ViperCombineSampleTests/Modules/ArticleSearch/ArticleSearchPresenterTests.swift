@@ -10,7 +10,6 @@ import Quick
 import Nimble
 import Combine
 import CombineSchedulers
-import OrderedCollections
 
 final class ArticleSearchPresenterTests: QuickSpec {
     override func spec() {
@@ -56,14 +55,12 @@ final class ArticleSearchPresenterTests: QuickSpec {
             }
             
             context("articleSearchInteractorの返却値がエラーのとき") {
-                let error = ArticleSearchError(error: NSError(domain: "hoge", code: -1, userInfo: nil))
+                let error = ArticleSearchError(error: .connectionError(NSError(domain: "hoge", code: -1, userInfo: nil)))
                 
                 beforeEach {
-                    articleSearchInteractor.executeResult = Future { promise in
-                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
-                            promise(.failure(error))
-                        }
-                    }.eraseToAnyPublisher()
+                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                        articleSearchInteractor.executeResult.send(completion: .failure(error))
+                    }
                     
                     testScheduler.advance(by: 10)
                 }
@@ -82,11 +79,9 @@ final class ArticleSearchPresenterTests: QuickSpec {
                 ]
                 
                 beforeEach {
-                    articleSearchInteractor.executeResult = Future { promise in
-                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
-                            promise(.success(articles))
-                        }
-                    }.eraseToAnyPublisher()
+                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                        articleSearchInteractor.executeResult.send(articles)
+                    }
                     
                     testScheduler.advance(by: 10)
                 }
@@ -108,14 +103,12 @@ final class ArticleSearchPresenterTests: QuickSpec {
             }
             
             context("articleSearchInteractorの返却値がエラーのとき") {
-                let error = ArticleSearchError(error: NSError(domain: "hoge", code: -1, userInfo: nil))
+                let error = ArticleSearchError(error: .connectionError(NSError(domain: "hoge", code: -1, userInfo: nil)))
                 
                 beforeEach {
-                    articleSearchInteractor.executeResult = Future { promise in
-                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
-                            promise(.failure(error))
-                        }
-                    }.eraseToAnyPublisher()
+                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                        articleSearchInteractor.executeResult.send(completion: .failure(error))
+                    }
                     
                     testScheduler.advance(by: 10)
                 }
@@ -134,11 +127,9 @@ final class ArticleSearchPresenterTests: QuickSpec {
                 ]
                 
                 beforeEach {
-                    articleSearchInteractor.executeResult = Future { promise in
-                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
-                            promise(.success(articles))
-                        }
-                    }.eraseToAnyPublisher()
+                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                        articleSearchInteractor.executeResult.send(articles)
+                    }
                     
                     testScheduler.advance(by: 10)
                 }

@@ -49,11 +49,9 @@ final class ArticleSearchInteractorTests: QuickSpec {
                 let connectionError: QiitaRepositoryError = .connectionError(error)
                 
                 beforeEach {
-                    qiitaDataStore.searchArticlesResult = Future { promise in
-                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
-                            promise(.failure(connectionError))
-                        }
-                    }.eraseToAnyPublisher()
+                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                        qiitaDataStore.searchArticlesResult.send(completion: .failure(connectionError))
+                    }
                     
                     testScheduler.advance(by: 10)
                 }
@@ -69,11 +67,9 @@ final class ArticleSearchInteractorTests: QuickSpec {
                 let requestError: QiitaRepositoryError = .requestError(error)
                 
                 beforeEach {
-                    qiitaDataStore.searchArticlesResult = Future { promise in
-                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
-                            promise(.failure(requestError))
-                        }
-                    }.eraseToAnyPublisher()
+                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                        qiitaDataStore.searchArticlesResult.send(completion: .failure(requestError))
+                    }
                     
                     testScheduler.advance(by: 10)
                 }
@@ -89,11 +85,9 @@ final class ArticleSearchInteractorTests: QuickSpec {
                 let responseError: QiitaRepositoryError = .responseError(error)
                 
                 beforeEach {
-                    qiitaDataStore.searchArticlesResult = Future { promise in
-                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
-                            promise(.failure(responseError))
-                        }
-                    }.eraseToAnyPublisher()
+                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                        qiitaDataStore.searchArticlesResult.send(completion: .failure(responseError))
+                    }
                     
                     testScheduler.advance(by: 10)
                 }
@@ -111,11 +105,9 @@ final class ArticleSearchInteractorTests: QuickSpec {
                 ]
                 
                 beforeEach {
-                    qiitaDataStore.searchArticlesResult = Future { promise in
-                        testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
-                            promise(.success(response))
-                        }
-                    }.eraseToAnyPublisher()
+                    testScheduler.schedule(after: testScheduler.now.advanced(by: 10)) {
+                        qiitaDataStore.searchArticlesResult.send(response)
+                    }
                     
                     testScheduler.advance(by: 10)
                 }

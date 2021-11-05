@@ -10,9 +10,9 @@ import Combine
 
 final class MockArticleSearchInteractor: ArticleSearchUsecase {
     private(set) var executeCallCount = 0
-    var executeResult: AnyPublisher<[ArticleModel], ArticleSearchError>!
+    let executeResult = PassthroughSubject<[ArticleModel], ArticleSearchError>()
     func execute(_ input: String) -> AnyPublisher<[ArticleModel], ArticleSearchError> {
         executeCallCount += 1
-        return executeResult
+        return executeResult.eraseToAnyPublisher()
     }
 }

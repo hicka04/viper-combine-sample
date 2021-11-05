@@ -10,9 +10,9 @@ import Combine
 
 final class MockQiitaDataStore: QiitaRepository {
     private(set) var searchArticlesCallCount = 0
-    var searchArticlesResult: AnyPublisher<[ArticleModel], QiitaRepositoryError>!
+    let searchArticlesResult = PassthroughSubject<[ArticleModel], QiitaRepositoryError>()
     func searchArticles(keyword: String) -> AnyPublisher<[ArticleModel], QiitaRepositoryError> {
         searchArticlesCallCount += 1
-        return searchArticlesResult
+        return searchArticlesResult.eraseToAnyPublisher()
     }
 }
